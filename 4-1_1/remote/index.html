@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        @font-face {
+            font-family: 'Bbatang';
+            src: url('./font/batang.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Malgun';
+            src: url('./font/malgun.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Malgunbd';
+            src: url('./font/malgunbd.ttf') format('truetype');
+        }
+        
+        html, body{
+            padding:0;
+            margin: 0px;
+            height: 100%;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        remote-html-embed {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 90%;
+        }
+
+        #study_container * {
+            box-sizing: border-box;
+            font-family: 'Malgun';
+        }
+
+        /* #study_activity > * {
+            font-family: 'Malgun';
+            line-height: 100%;
+        } */
+
+        /** 데이터 로딩 전까지 숨기기  */
+        #container {
+            visibility: hidden;
+        }
+
+    </style>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/intro.css">
+    <link rel="stylesheet" href="./css/study.css">
+  </head>
+  <body>
+    <div id="container">
+        <div class="wrap">
+            <div id="intro_activity" class="activity">
+                <div id="intro_container">
+                    <div id="title_container">
+                        <div id="title_text" class="malgun_bd">큰 수</div>
+                        <img id="title_mark" src="./img/intro/marker.png" alt="">
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 190px;">
+                        <img id="step1Btn" src="./img/intro/btn_m1.png" alt="" class="pointer">
+                        <img id="step2Btn" src="./img/intro/btn_m2.png" alt="" class="pointer">
+                    </div>
+                </div>
+            </div>
+
+            <div id="study_activity" class="activity">
+                <!-- 상단 제목-->
+                <div id="top_container" style="background: #209E2C">
+                    <div id="topArea_type" class="malgun_bd" style="color: #004807;">개념 학습</div>
+                    <div id="topArea_title" class="malgun_bd">큰 수</div>
+
+                    <img src="./img/common/btn_camera.png" id="capture" class="pointer" alt="">
+                    <img src="./img/common/btn_home.png" id="homeBtn" class="pointer" alt="">
+                </div>
+                
+                <div id="study_container">
+                    <!-- 좌측 -->
+                    <div id="leftArea">
+                        <!-- 범용 학습 컴포넌트 -->
+                        <remote-html-embed html-url="../origin/index.html" id="embed1" data-type="0" class="embed"></remote-html-embed>
+                        <remote-html-embed html-url="../origin2/index.html" id="embed2" data-type="1" class="embed"></remote-html-embed>
+                        <div id="embed_dumy" style="width: 100%; height: 90%; visibility: hidden; display: none;"></div>
+
+                        <!-- 하단 네비게이션 -->
+                        <div id="leftBottom">
+                            <div id="bot_nav_container">
+                                <img src="./img/common/btn_explain.png" alt="" style="visibility: hidden; margin-bottom: 40px; margin-left: 40px;" id="problemBtn" class="pointer">
+
+                                <div id="bottom_nav">
+                                    <div class="chapterBtn malgun_bd">교구1</div>
+                                    <div class="chapterBtn malgun_bd">교구2</div>
+                                    <div class="chapterBtn malgun_bd">정리</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 우측 -->
+                    <div id="rightArea">
+                        <!-- 개념 학습 -->
+                        <div id="chapter_content">
+
+                            <!-- 교과 1 -->
+                            <div id="chapter1" class="chapter">
+                                <div id="chapter1View01" class="chapterView1 on">
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">1</div>
+                                            <div class="question_text malgun">각 자리에 알맞은 수를 써넣어</div>
+                                        </div>
+    
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="clickBox c1_1" style="margin-left: 10px;"></div>
+                                            <div class="question_text malgun" style="margin-left: 5px;">을/를 완성하세요.</div>
+                                        </div>
+                                        
+                                    </div>
+    
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">2</div>
+                                            <div class="question_text malgun">다섯자리 수는</div>
+                                            <div class="clickBox c1_1" style="margin-left: 10px; width: 192px;"></div>
+                                        </div>
+    
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="question_text malgun">부터 만, 천, 백, 십, 일의 자리</div>
+                                        </div>
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="question_text malgun">순서로 읽습니다.</div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">3</div>
+                                            <div class="question_text malgun">각 자리의 숫자가 나타내는</div>
+                                        </div>
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="question_text malgun">값의 합으로 나타내어 보세요.</div>
+                                        </div>
+    
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="question_text malgun" style="font-size:60px;margin-left:140px;">68263</div>    
+                                        </div>
+                                        
+                                    </div>
+    
+                                    <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px; gap: 10px;">
+                                        <div class="ch1_default_calc batang">=</div>
+                                        <div class="writeBox c1_2" style="width: 200px;"></div>
+                                        <div class="ch1_default_calc batang">+</div>
+                                        <div class="writeBox c1_2" style="width: 189px;"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px; gap: 10px;">
+                                        <div class="ch1_default_calc batang" style="margin-left:-5px;">+</div>
+                                        <div class="writeBox c1_2" style="width: 130px;margin-left:-10px;"></div>
+                                        <div class="ch1_default_calc batang">+</div>
+                                        <div class="writeBox c1_2" style="width: 110px;margin-left:-10px;"></div>
+                                        <div class="ch1_default_calc batang">+</div>
+                                        <div class="writeBox c1_2" style="width: 100px;margin-left:-10px;"></div>
+                                    </div>
+                                </div>
+                                <div id="chapter1View02" class="chapterView1">
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">4</div>
+                                            <div class="question_text malgun">68263을 읽어 보세요.</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: flex-start; align-items: center; margin-top: 60px; gap: 10px;margin-left:45px;">
+                                        <div class="writeBox c1_2" style="width: 130px;"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: flex-start; align-items: center; margin-top: 10px; gap: 10px;margin-left:45px;">
+                                        <div class="writeBox c1_2" style="width: 130px;"></div>
+                                        <div class="writeBox c1_2" style="width: 130px;"></div>
+                                        <div class="writeBox c1_2" style="width: 130px;"></div>
+                                        <div class="writeBox c1_2" style="width: 130px;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="right-bottom-func">
+                                    <div class="func-item-wrap">
+                                        <button type="button" id="chapterPrev" ><span class="ch1_default_calc batang"><</span></button>
+                                        <button type="button" id="chapterNext"><span class="ch1_default_calc batang">></span></button>
+                                    </div>
+                                    <img src="./img/common/btn_reset.png" alt="다시하기" class="restart_btn" id="chapter1_reset">
+                                </div>
+                            </div>
+
+                            <!-- 교과 2 -->
+                            <div id="chapter2" class="chapter" style="display: none;">
+                                <div id="chapter1View03" class="chapterView2 on">
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">1</div>
+                                            <div class="question_text malgun">각 자리에 알맞은 수를 써넣어</div>
+                                        </div>
+    
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="clickBox c1_1" style="margin-left: 10px;"></div>
+                                            <div class="question_text malgun" style="margin-left: 5px;">을/를 완성하세요.</div>
+                                        </div>
+                                        
+                                    </div>
+    
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">2</div>
+                                            <div class="question_text malgun">다섯자리 수는</div>
+                                            <div class="clickBox" style="margin-left: 10px; width: 192px;"></div>
+                                        </div>
+    
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="question_text malgun">부터 만, 천, 백, 십, 일의 자리</div>
+                                        </div>
+                                        <div class="text_container" style="margin-top: 8px;">
+                                            <div class="numbering_dumy"></div>
+                                            <div class="question_text malgun">순서로 읽습니다.</div>
+                                        </div>
+                                    </div>
+     
+                                </div>
+                                <div id="chapter1View04" class="chapterView2">
+                                    <div class="question_container">
+                                        <div class="text_container">
+                                            <div class="numbering_container malgun">4</div>
+                                            <div class="question_text malgun">68263을 읽어 보세요.</div>
+                                        </div>
+                                    </div>
+                                     
+                                </div>
+
+                                <div class="right-bottom-func">
+                                    <div class="func-item-wrap">
+                                        <button type="button" id="chapterPrev" ><span class="ch1_default_calc batang"><</span></button>
+                                        <button type="button" id="chapterNext"><span class="ch1_default_calc batang">></span></button>
+                                    </div>
+                                    <img src="./img/common/btn_reset.png" alt="다시하기" class="restart_btn" id="chapter2_reset">
+                                </div>
+                            </div>
+
+                            <!-- 교과 3 (정리) -->
+                            <div id="chapter3" class="chapter">
+                                
+                                <div class="ch3_areaContainer" style="margin-top: 130px;">
+                                    <div class="ch3_textContainer">
+                                        <img src="./img/common/icon_check.png" alt="" style="margin-right: 25px;">
+                                        <div class="ch3_default_font">다섯자리 수는</div>
+                                        <div class="clickBox c3_1" style="width: 286px; height: 84px;margin-left: 5px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">부터 만, 천, 백, 십, 일의 자리 순서로 읽습니다.</div>
+                                    </div>
+                                </div>
+
+                                <div class="ch3_areaContainer">
+                                    <div class="ch3_textContainer">
+                                        <img src="./img/common/icon_check.png" alt="" style="margin-right: 25px;">
+                                        <div class="ch3_default_font">1000이 10개인 수는</div>
+                                        <div class="clickBox c3_1" style="width: 242px; height: 84px; margin-left: 15px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">, 100개인 수는</div>
+                                    </div>
+                                    <div class="ch3_textContainer">
+                                        <div class="clickBox c3_1" style="width: 242px; height: 84px; margin-left: 102px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">, 1000개인 수는</div>
+                                        <div class="clickBox c3_1" style="width: 242px; height: 84px; margin-left: 15px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;"> 입니다.</div>
+                                    </div>
+                                </div>
+
+                                <div class="ch3_areaContainer">
+                                    <div class="ch3_textContainer">
+                                        <img src="./img/common/icon_check.png" alt="" style="margin-right: 25px;">
+                                        <div class="ch3_default_font">만, 십만, 백만, 천만 자리의 수를</div>
+                                        <div class="clickBox c3_1" style="width: 138px; height: 84px; margin-left: 15px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">(으)로 묶어 읽습니다.</div>
+                                        <div class="writeBox malgun_bd" id="c3_multiText" style="height: 84px; width: 0;overflow:hidden;opacity:0;"></div>
+                                    </div>
+
+                                </div>
+                                <!--
+                                <div class="ch3_areaContainer" style="margin-top: 130px;">
+                                    <div class="ch3_textContainer">
+                                        <img src="./img/common/icon_check.png" alt="" style="margin-right: 25px;">
+                                        <div class="ch3_default_font">다섯자리 수는</div>
+                                        <div class="clickBox c3_1" style="width: 286px; height: 84px;margin-left: 5px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">부터 만, 천, 백, 십, 일의 자리 순서로 읽습니다.</div>
+                                    </div>
+                                </div>
+
+                                <div class="ch3_areaContainer">
+                                    <div class="ch3_textContainer">
+                                        <img src="./img/common/icon_check.png" alt="" style="margin-right: 25px;">
+                                        <div class="ch3_default_font">1000이 10개인 수는</div>
+                                        <div class="clickBox c3_1" style="width: 242px; height: 84px; margin-left: 15px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">, 100개인 수는</div>
+                                    </div>
+                                    <div class="ch3_textContainer">
+                                        <div class="clickBox c3_1" style="width: 242px; height: 84px; margin-left: 102px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">, 1000개인 수는</div>
+                                        <div class="clickBox c3_1" style="width: 242px; height: 84px; margin-left: 15px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;"> 입니다.</div>
+                                    </div>
+                                </div>
+
+                                <div class="ch3_areaContainer">
+                                    <div class="ch3_textContainer">
+                                        <img src="./img/common/icon_check.png" alt="" style="margin-right: 25px;">
+                                        <div class="ch3_default_font">만, 십만, 백만, 천만 자리의 수를</div>
+                                        <div class="clickBox c3_1" style="width: 138px; height: 84px; margin-left: 15px;"></div>
+                                        <div class="ch3_default_font" style="margin-left: 5px;">(으)로 묶어 읽습니다.</div>
+                                    </div>
+                                </div>
+                                -->
+
+                                <img src="./img/common/btn_reset.png" alt="다시하기" class="restart_btn" id="chapter3_reset" style="top: 825px; left: 1690px;">
+                            </div>
+                        </div>
+
+                        <!-- 문제 풀이 -->
+                        <div id="problem_content">                            
+                            <div id="problem_stepList" class="tab_container" style="background-color: #E2EBF4; border-top: 3px solid #CCD7E1 ">
+                                <div class="problem_step tab_btn" style="width: 25%;">1</div>
+                                <div class="problem_step tab_btn" style="width: 25%;">2</div>
+                                <div class="problem_step tab_btn" style="width: 25%;">3</div>
+                                <div class="problem_step tab_btn" style="width: 25%;">4</div>
+                            </div>
+
+                            <!-- 문제 1 -->
+                            <div id="problem1" class="problem_content" style="flex-direction: column; margin-top: 70px;">
+                                <div style="display: flex; justify-content: center; align-items: center; font-size: 54px; height: 54px;">
+                                    <div id="p1_value1"  class="batang"></div>
+                                    <div  class="batang">×</div>
+                                    <div id="p1_value2"  class="batang"></div>
+                                </div>
+
+                                <div style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 60px;">
+                                    <img src="./img/study/problem/pb1_split.png" alt="">
+                                </div>
+
+                                <div class="pb1_main_container">
+                                    <div class="pb1_default_font malgun_bd">백</div>
+                                    <div class="writeBox p1_1" style="width: 189px;"></div>
+                                </div>
+
+                                <div class="pb1_main_container">
+                                    <div class="pb1_default_font malgun_bd">십</div>
+                                    <div class="writeBox p1_1" style="width: 189px;"></div>
+                                </div>
+
+                                <div class="pb1_main_container">
+                                    <div class="pb1_default_font malgun_bd">일</div>
+                                    <div class="writeBox p1_1" style="width: 189px;"></div>
+                                </div>
+
+                                <img src="./img/common/btn_reset.png" alt="다시하기" id="problem1_reset" class="restart_btn">
+                            </div>
+
+                            <!-- 문제 2 -->
+                            <div id="problem2" class="problem_content" style="display: none; flex-direction: column;">
+                                <div class="problem2_container" style="margin-top: 35px;">
+                                    <div id="p2_value1" class="pb2_default_font batang"></div>
+                                    <div class="batang">×</div>
+                                    <div class="batang">2</div>
+                                    <div class="batang">＝</div>
+                                    <div class="writeBox p2_1"></div>
+                                </div>
+                                
+                                <div class="problem2_container">
+                                    <div id="p2_value2" class="batang"></div>
+                                    <div class="batang">×</div>
+                                    <div class="batang">3</div>
+                                    <div class="batang">＝</div>
+                                    <div class="writeBox p2_1"></div>
+                                </div>
+
+                                <div class="problem2_container">
+                                    <div id="p2_value3" class="batang"></div>
+                                    <div class="batang">×</div>
+                                    <div class="batang">4</div>
+                                    <div class="batang">＝</div>
+                                    <div class="writeBox p2_1"></div>
+                                </div>
+
+                                <div class="problem2_container">
+                                    <div id="p2_value4" class="batang"></div>
+                                    <div class="batang">×</div>
+                                    <div class="batang">2</div>
+                                    <div class="batang">＝</div>
+                                    <div class="writeBox p2_1"></div>
+                                </div>
+
+                                <div class="problem2_container">
+                                    <div id="p2_value5" class="batang"></div>
+                                    <div class="batang">×</div>
+                                    <div class="batang">2</div>
+                                    <div class="batang">＝</div>
+                                    <div class="writeBox p2_1"></div>
+                                </div>
+
+                                <img src="./img/common/btn_reset.png" alt="다시하기" class="restart_btn" id="problem2_reset">
+                            </div>
+
+                            
+                            <!-- 문제 3 -->
+                            <div id="problem3" class="problem_content" style="display: none;">
+                                <img id="pb3_line" src="./img/study/problem/pb3_line.png" alt="" style="position: absolute; top: 395px; left: 1353px; width: 435px; pointer-events: none;">
+                                <div style="margin-top: 115px;">
+                                    <div style="display: flex; gap: 8px;" id="p3_inputZone1"></div>
+                                    <div style="display: flex; gap: 8px;" id="p3_inputZone2"></div>
+                                    <div style="margin: 8px;"></div>
+                                    <div style="display: flex; gap: 8px;" id="p3_inputZone3"></div>
+                                    <div class="middleLine" style="width: 452px; left: 1347px;"></div>
+                                    <div style="display: flex; gap: 8px; margin-top: 21px;" id="p3_inputZone4"></div>
+                                </div>
+
+                                <img src="./img/common/btn_reset.png" alt="다시하기" class="restart_btn" id="problem3_reset"> 
+                            </div>
+
+                            <!-- 문제 4 -->
+                            <div id="problem4" class="problem_content" style="display: none;">
+                                <img id="pb4_line" src="./img/study/problem/pb4_line.png" alt="" style="position: absolute; top: 395px; left: 1353px; width: 435px; pointer-events: none;">
+                                <div style="margin-top: 115px;">
+                                    <div style="display: flex; gap: 8px;" id="p4_inputZone1"></div>
+                                    <div style="display: flex; gap: 8px;" id="p4_inputZone2"></div>
+                                    <div style="margin: 8px;"></div>
+                                    <div style="display: flex; gap: 8px;" id="p4_inputZone3"></div>
+                                    <div class="middleLine" style="width: 452px; left: 1347px;"></div>
+                                    <div style="display: flex; gap: 8px; margin-top: 21px;" id="p4_inputZone4"></div>
+                                </div>
+
+                                <img src="./img/common/btn_reset.png" alt="다시하기" class="restart_btn" id="problem4_reset"> 
+                            </div>
+
+                            <!-- 문제 5 -->
+                            <div id="problem5" class="problem_content" style="display: none;">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <div>문제5</div>
+                                    <input type="text">
+                                    <div>만큼 놓아 보세요.</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="common" style="position: absolute; top: 0px; left: 0px;">
+                
+                <div class="keyboard" style="display: none">
+                    <div class="key_container">
+                        <button type="button" class="key-btn btn1" data-num="1">1</button>
+                        <button type="button" class="key-btn btn2" data-num="2">2</button>
+                        <button type="button" class="key-btn btn3" data-num="3">3</button>
+                    </div>
+
+                    <div class="key_container">
+                        <button type="button" class="key-btn btn4" data-num="4">4</button>
+                        <button type="button" class="key-btn btn5" data-num="5">5</button>
+                        <button type="button" class="key-btn btn6" data-num="6">6</button>
+                    </div>
+
+                    <div class="key_container">
+                        <button type="button" class="key-btn btn7" data-num="7">7</button>
+                        <button type="button" class="key-btn btn8" data-num="8">8</button>
+                        <button type="button" class="key-btn btn9" data-num="9">9</button>
+                    </div>
+
+                    <div class="key_container" style="margin-bottom: 20px;">
+                        <button type="button" class="key-btn btnDot black" data-num=".">.</button>
+                        <button type="button" class="key-btn btn0" data-num="0">0</button>
+                        <button type="button" class="key-btn btnDel black" data-num="del"><img src="./img/common/del.png" alt=""></button>
+                    </div>
+                </div>
+
+                <div id="popup" style="display: none;">
+                    <img id="dimImg" src="../remote/img/common/dim_popup.png" alt="" style="width: 300000px; height: 1020px; transform: translateX(-100%); z-index: 3;">
+                    <img id="dimImg" src="../remote/img/common/dim_popup.png" alt="" style="width: 300000px; height: 1020px; position: absolute; left: 1920px; z-index: 3;">
+                    <img id="dimImg" src="./img/study/chapter/ch1_dim.png" alt="" style="width: 1920px; height: 1020px; position: absolute; top: 0px; left: 0px; z-index: 3;">
+    
+                    <div style="z-index: 4; width: 573px; height: 180px; border: 4px solid black; background-color: white; position: absolute; left: 673.5px; top: 330px; border-radius: 60px;">
+                        <img id="popup_close" src="./img/common/btn_close.png" alt="" style="position: absolute; top: 20px; left: 480px; cursor: pointer;">
+
+                        <div id="pop_text" style="font-size: 36px; display: flex; justify-content: center; flex-direction: column; height: 100%; margin-left: 60px;" class="malgun_bd">
+                            <div>작성한 수와 계산 결과를</div>
+                            <div>비교해 보세요!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loading" style="display: none;">
+                    <img src="./img/common/dim_popup.png" alt="" style="width: 1920px; height: 1020px; position: absolute; top: 0; left: 0; z-index: 3;">
+                    <div style="color:white; z-index: 4; width: 1920px; height: 1020px; position: absolute; top: 500px; left: 760px; font-size: 38px;" class="malgun_bd">이미지를 다운로드 중입니다...</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="./js/Library/jquery-3.7.1.min.js"></script>
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/Component/shadow-dom.js"></script>
+    <script type="module" src="./js/Library/html2canvas.js"></script>
+    
+  </body>
+</html>
