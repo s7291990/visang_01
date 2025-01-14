@@ -144,6 +144,7 @@ button {
     justify-content: center;
     align-items: center;
     margin-top: 15px;
+    width:650px;
 }
 
 .text_container {

@@ -183,9 +183,19 @@ export default class Chapter_1_1 {
         this.ProblemList2.forEach((problem, index) => {            
             problem.answerDiv.textContent = ""
             
-            if (problem.isActive) {
+            // 입력박스 초기화
+            let chapter1 = MainEvent.chapter.chapter_1_1
+            chapter1.ProblemList2.forEach((problem, index) => {
+                problem.DeActivate(true);
+                problem.element.style.boxShadow = ""
                 problem.imgDiv.style.opacity = 1
-            }
+            })
+            
+            // 탭 첫번째로 이동
+            this.ChangeChapterView("chapter1View01")
+            //problem.isActive = false;
+            //problem.DeActivate()
+            // 버튼 활성화
             
         })
 

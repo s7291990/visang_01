@@ -118,10 +118,10 @@ export default class ChapterActivity {
                     case 1:  
                         ShowEmbed(1)
                         this.isTabUse = false
-                        this.chapter_content.style.backgroundColor = "rgba(226, 244, 227, 1)"
+                        //this.chapter_content.style.backgroundColor = "rgba(226, 244, 227, 1)"
 
                         this.TabClear()
-                        this.chaper2_subBtnList[1].style.borderLeft = "3px solid rgb(204, 225, 205)"
+                        //this.chaper2_subBtnList[1].style.borderLeft = "3px solid rgb(204, 225, 205)"
                         this.chapter_2_1.Clear()
                         break;
                     case 2:
