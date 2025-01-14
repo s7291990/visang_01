@@ -11,6 +11,9 @@ export default class Problem_1 {
 
         this.p1_value1 = document.querySelector("#p1_value1")
         this.p1_value2 = document.querySelector("#p1_value2")
+        this.p1_value3 = document.querySelector("#p1_value3")
+        this.p1_value4 = document.querySelector("#p1_value4")
+        this.p1_value5 = document.querySelector("#p1_value5")
 
         this.problem1_reset = document.querySelector("#problem1_reset")
     }
@@ -22,17 +25,23 @@ export default class Problem_1 {
     }
 
     SetObject() {
-        this.value1 = GetRandomValue(100, 999)
-        this.value2 = GetRandomValue(1, 4)
+        //this.value1 = GetRandomValue(100, 999)
+        this.value1 = GetRandomValue(1, 9)
+        this.value2 = GetRandomValue(1, 9)
+        this.value3 = GetRandomValue(1, 9)
+        this.value4 = GetRandomValue(1, 9)
+        this.value5 = GetRandomValue(1, 9)
 
 
         this.value1List = NumToArray(this.value1)
 
         this.inputAnswerList_1 = []
 
-        this.inputAnswerList_1.push(this.value1List[0] * this.value2)
-        this.inputAnswerList_1.push(this.value1List[1] * this.value2)
-        this.inputAnswerList_1.push(this.value1List[2] * this.value2)
+        this.inputAnswerList_1.push(this.value1List[0] * 10000)
+        this.inputAnswerList_1.push(this.value1List[1] * 1000)
+        this.inputAnswerList_1.push(this.value1List[2] * 100)
+        this.inputAnswerList_1.push(this.value1List[3] * 10)
+        this.inputAnswerList_1.push(this.value1List[4] * 1)
 
         this.answer = this.value1 * this.value2
         this.answerArrayList = NumToArray(this.answer)
@@ -46,6 +55,10 @@ export default class Problem_1 {
 
         this.p1_value1.textContent = this.value1
         this.p1_value2.textContent = this.value2
+        this.p1_value3.textContent = this.value3
+        this.p1_value4.textContent = this.value4
+        this.p1_value5.textContent = this.value5
+        //MainEvent.embed1.querySelector("#total_number_5 .num").textContent = this.value1
     }
 
     SetProblem() {
@@ -55,7 +68,8 @@ export default class Problem_1 {
 
         this.priorityStandardList_1 = [2]
         this.inputBoxList_1 = this.problem1.querySelectorAll(".p1_1")
-
+        
+        console.log(this.inputBoxList_1);
         this.inputBoxList_1.forEach((element, index) => {
             element.innerHTML = ""
             element = RemoveListener(element)
