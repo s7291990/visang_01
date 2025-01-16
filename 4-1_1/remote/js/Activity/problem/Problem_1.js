@@ -20,7 +20,6 @@ export default class Problem_1 {
 
     Init() {
         this.SetEvent()
-
         
     }
 
@@ -87,75 +86,83 @@ export default class Problem_1 {
 
             this.ProblemList1.push(problemCtrl)
         })   
+        
     }
 
     SetEvent() {
+        let _embed1 = embed1.shadowRoot;
         this.problem1_reset.addEventListener("click", (e) => {
             this.Clear()
         })
 
-        let _embed1 = embed1.shadowRoot; 
-        const leftNumbers = () => {
-            const numbers = Array.from({ length: 5 }, (_, i) => 
-                _embed1.querySelector(`#p1_value${1 + i} .num`).textContent
-            ).join('');
-            console.log(numbers);
-        };
         const rightNumbers = () => {
-
-            // 오른쪽 숫자 구하기
-            const rightNum = Array.from({ length: 5 }, (_, i) => 
-                document.querySelector(`#p1_value${1 + i}`).textContent
-            ).join('');
-            console.log(rightNum);
-
-            // 왼쪽 숫자 구하기
-            const leftNum = Array.from({ length: 5 }, (_, i) => 
-                _embed1.querySelector(`#total_number_${5 - i} .num`).textContent
-            ).join('');
-            console.log(leftNum);
-
-            
-            // 오른쪽 , 왼쪽 숫자 비교
-            if(rightNum === leftNum){
-                console.log("정답");
-                // 인풋 활성화
-                this.ProblemList1.forEach((problem, index) => {
-                    switch(index) {
-                        case 0:
-                            problem.SetAnswerText(this.value1*10000)
-                            problem.Activate()
-                            break;
-                        case 1:
-                            problem.SetAnswerText(this.value2*1000)
-                            problem.Activate()
-                            break;
-                        case 2:
-                            problem.SetAnswerText(this.value3*100)
-                            problem.Activate()
-                            break;
-                        case 3:
-                            problem.SetAnswerText(this.value4*10)
-                            problem.Activate()
-                            break;
-                        case 4:
-                            problem.SetAnswerText(this.value5)
-                            problem.Activate()
-                            break;
+            console.log(MainEvent.step);
+            if(MainEvent.pageIdx === 0 && MainEvent.step === 'problem'){
+                // 오른쪽 숫자 구하기
+                const rightNum = Array.from({ length: 5 }, (_, i) => 
+                    document.querySelector(`#problem1 #p1_value${1 + i}`).textContent
+                ).join('');
+                console.log(rightNum);
+    
+                // 왼쪽 숫자 구하기
+                const leftNum = Array.from({ length: 5 }, (_, i) => 
+                    _embed1.querySelector(`#total_number_${5 - i} .num`).textContent
+                ).join('');
+                console.log(leftNum);
+    
+                console.log("Step=="+MainEvent.pageIdx);
+    
+                
+                // 오른쪽 , 왼쪽 숫자 비교
+                if(rightNum === leftNum){
+                    console.log("정답");
+                    // 인풋 활성화
+                    this.ProblemList1.forEach((problem, index) => {
+                        switch(index) {
+                            case 0:
+                                problem.SetAnswerText(this.value1*10000)
+                                problem.Activate()
+                                break;
+                            case 1:
+                                problem.SetAnswerText(this.value2*1000)
+                                problem.Activate()
+                                break;
+                            case 2:
+                                problem.SetAnswerText(this.value3*100)
+                                problem.Activate()
+                                break;
+                            case 3:
+                                problem.SetAnswerText(this.value4*10)
+                                problem.Activate()
+                                break;
+                            case 4:
+                                problem.SetAnswerText(this.value5)
+                                problem.Activate()
+                                break;
+                        }
+                    })
+                    
+                    
+                }else{
+                    if(leftNum.length === 5 ){
+                        console.log("오답" + leftNum.length);
+                        _embed1.querySelector("#reset_card_popup_btn_ok").click();
+                        Array.from({ length: 5 }, (_, i) => 
+                            _embed1.querySelector(`#total_number_${5 - i} .num`).textContent = ''
+                        )
                     }
-                })
-                
-            }else{
-                if(leftNum.length === 5 ){
-                    console.log("오답" + leftNum.length);
-                    _embed1.querySelector("#reset_card_popup_btn_ok").click();
-                    Array.from({ length: 5 }, (_, i) => 
-                        _embed1.querySelector(`#total_number_${5 - i} .num`).textContent = ''
-                    )
+                    
                 }
-                
             }
-        };
+        }
+
+        
+        // const leftNumbers = () => {
+        //     const numbers = Array.from({ length: 5 }, (_, i) => 
+        //         _embed1.querySelector(`#p1_value${1 + i} .num`).textContent
+        //     ).join('');
+        //     console.log(numbers);
+        // };
 
         // 숫자 클릭시 비교
         _embed1.querySelector("#key_1").addEventListener("click", rightNumbers);
@@ -194,20 +201,20 @@ export default class Problem_1 {
     }
 
     Clear() {
-
+        let _embed1 = embed1.shadowRoot;
         //MainEvent.embed1.querySelector('.number_reset').click()
         //let sec1 = MainEvent.embed1.querySelector("#total_number_5")
         //console.log(sec1);
-        let _embed1 = embed1.shadowRoot; 
+        //let _embed1 = embed1.shadowRoot; 
         var isActive = document.querySelector("#study_activity").classList.contains('active');
         if (isActive) {
             _embed1.querySelector("#reset_card_popup_btn_ok").click();
         }else{
-           _embed1.querySelector("#total_number_5 .num").innerText = "6";
-           _embed1.querySelector("#total_number_4 .num").innerText = "8";
-           _embed1.querySelector("#total_number_3 .num").innerText = "2";
-           _embed1.querySelector("#total_number_2 .num").innerText = "6";
-           _embed1.querySelector("#total_number_1 .num").innerText = "3";
+            _embed1.querySelector("#total_number_5 .num").innerText = "6";
+            _embed1.querySelector("#total_number_4 .num").innerText = "8";
+            _embed1.querySelector("#total_number_3 .num").innerText = "2";
+            _embed1.querySelector("#total_number_2 .num").innerText = "6";
+            _embed1.querySelector("#total_number_1 .num").innerText = "3";
         }
 
         

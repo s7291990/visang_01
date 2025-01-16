@@ -9,174 +9,65 @@ export default class Problem_3 {
     constructor() {
         this.problem3 = document.querySelector("#problem3")
 
-        this.p3_inputZone1 = document.querySelector("#p3_inputZone1")
-        this.p3_inputZone2 = document.querySelector("#p3_inputZone2")
-        this.p3_inputZone3 = document.querySelector("#p3_inputZone3")
-        this.p3_inputZone4 = document.querySelector("#p3_inputZone4")
+        this.p3_value1 = document.querySelector("#p3_value1")
+        this.p3_value2 = document.querySelector("#p3_value2")
+        this.p3_value3 = document.querySelector("#p3_value3")
+        this.p3_value4 = document.querySelector("#p3_value4")
 
         this.chapter3_reset = document.querySelector("#problem3_reset")
 
-        this.pb3_line = document.querySelector("#pb3_line")
     }
 
     Init() {
-        this.rowCnt = 4
-
-
         this.SetEvent()
     }
 
     SetObject() {
-        this.value1 = GetRandomValue(100, 999)
-        this.value2 = GetRandomValue(1, 4)
+        this.value1 = GetRandomValue(1, 9)
+        this.value2 = GetRandomValue(1, 9)
+        this.value3 = GetRandomValue(1, 9)
+        this.value4 = GetRandomValue(1, 9)
 
-        this.inputDiv1List = []
-        this.inputDiv2List = []
+        this.value1List = NumToArray(this.value1)
 
-        this.value1Array = NumToArray(this.value1)
-        this.value2Array = NumToArray(this.value2)
+        this.inputAnswerList_1 = []
 
-        this.value1ArrayReverse = NumToArray(this.value1).reverse()
+        this.inputAnswerList_1.push(this.value1List[0])
+        this.inputAnswerList_1.push(this.value1List[1] * 1000)
+        this.inputAnswerList_1.push(this.value1List[2] * 100)
+        this.inputAnswerList_1.push(this.value1List[3] * 10)
 
-        //올림 수 세팅
-        this.answer1Array = [""]
-        this.value1ArrayReverse.forEach((element, index) => {
-            //올림수 자리까지 더한 값
-            let calcNumber = element * this.value2 + this.answer1Array[0]
-
-            //10보다 크고 자리수(임시 4자리)의 첫자리는 제외한다
-            if (calcNumber >= 10 && index != this.value1ArrayReverse.length - 1) {
-                this.answer1Array.unshift(Math.floor(calcNumber / 10))
-            } else {
-                this.answer1Array.unshift("")
-            }
-        })
-
-        this.answer1Array.forEach((element, index) => {
-            let inputBox = document.createElement("div")
-            inputBox.style.width = "80px"
-            inputBox.style.height = "80px"
-            inputBox.style.border = "6.4px solid rgba(191, 199, 218, 1)"
-            inputBox.classList.add("writeBox")
-
-            if (element === "" ) {
-                inputBox.style.visibility = "hidden"
-                inputBox.classList.add("hide")
-            }
-    
-            this.inputDiv1List.push(inputBox)
-            this.DivParentPush(inputBox, this.p3_inputZone1)
-        })
-
-        //곱하는 수 세팅
-        this.answer2Array = FillBlankArray(this.value1Array, this.rowCnt, true)
         
-        this.answer2Array.forEach((element, index) => {
-            let div = document.createElement("div")
-            div.style.fontSize = "65px"
-            div.style.fontFamily = "Bbatang"
-            div.textContent = element
-          
-            this.p3_inputZone2.appendChild(div)
-            this.DivParentPush(div, this.p3_inputZone2)
-        })
+
+        //this.inputAnswerList_1 = [this.answerArrayList[0], this.answerArrayList[1], this.answerArrayList[2]]
+
+        this.p3_value1.textContent = this.value1
+        this.p3_value2.textContent = this.value2
+        this.p3_value3.textContent = this.value3
+        this.p3_value4.textContent = this.value4
         
-        // 곱해지는 수 세팅
-        this.answer3Array = FillBlankArray(this.value2Array, this.rowCnt, true)
-        this.answer3Array[0] = "×"
-        
-        this.answer3Array.forEach((element, index) => {
-            let div = document.createElement("div")
-            div.style.fontSize = "65px"
-            div.style.fontFamily = "Bbatang"
-            div.textContent = element
-          
-            this.DivParentPush(div, this.p3_inputZone3)
-        })
-
-        //정답 세팅
-        this.answer = this.value1 * this.value2
-        this.answerArray = FillBlankArray(NumToArray(this.answer), this.rowCnt, true)
-
-        this.pb3_line.style.clipPath = ""
-        this.answerArray.forEach((element, index) => {
-            let inputBox = document.createElement("div")
-            inputBox.style.width = "100px"
-            // inputBox.style.height = "100px"
-            inputBox.classList.add("writeBox")
-
-            if (element === "") {
-                inputBox.style.visibility = "hidden"
-                inputBox.classList.add("hide")
-                this.pb3_line.style.clipPath = "polygon(20% 0%, 100% 0, 100% 100%, 20% 100%)"
-            }
-
-            this.inputDiv2List.push(inputBox)
-    
-            this.DivParentPush(inputBox, this.p3_inputZone4)
-        })
-        
-    }
-
-    DivParentPush(valEl, pushEl) {
-        let spaceParent = document.createElement("div")
-        spaceParent.classList.add("calcSpace")
-
-        spaceParent.appendChild(valEl)
-
-        pushEl.appendChild(spaceParent)
     }
 
 
     SetProblem() {
 
         this.ProblemList1 = []
-        this.inputBoxList = []
-        this.inputAnswerList = []
-
-        /* 올림수 영역 위치 체크 변수 */
-        this.optionCaseIdxList = []
-
-        /** 우선순위 증가 시키는 인덱스 범위 */
-        this.priorityStandardList_1 = []
-        this.priority = 0
-
-        for (let i = this.rowCnt - 1; i >= 0 ; i--) {
-            if (!this.inputDiv2List[i].classList.contains("hide")) {
-                this.inputBoxList.push(this.inputDiv2List[i])
-                this.inputAnswerList.push(this.answerArray[i])
-            }
-
-            if (this.inputDiv1List[i - 1]) {
-                if (!this.inputDiv1List[i-1].classList.contains("hide")) {
-                    this.inputBoxList.push(this.inputDiv1List[i-1])
-                    this.inputAnswerList.push(this.answer1Array[i-1])
-
-                    this.optionCaseIdxList.push(this.inputBoxList.length - 1)
-                }
-            }
-
-            // if (this.priorityStandardList_1[this.priorityStandardList_1.length - 1] != this.inputBoxList.length - 1) {
-            //     this.priorityStandardList_1.push(this.inputBoxList.length - 1)
-            // }
-        }
-
-        this.priorityStandardList_1.push(this.inputBoxList.length - 1)
 
         this.problemEmmiter = new EventEmitter()
 
-        this.inputBoxList.forEach((element, index) => {
+        this.priorityStandardList_1 = [2]
+        this.inputBoxList_1 = this.problem3.querySelectorAll(".problem3_1")
+        
+        this.inputBoxList_1.forEach((element, index) => {
+            element.innerHTML = ""
             element = RemoveListener(element)
 
             let problemCtrl = new ProblemWriteController(element, this.problemEmmiter)
             problemCtrl.priorityStandardList = this.priorityStandardList_1
-            problemCtrl.answer = this.inputAnswerList[index]
+            problemCtrl.answer = this.inputAnswerList_1[index]
 
-            //올림수 영역이라면
-            if (this.optionCaseIdxList.includes(index)) {
-                problemCtrl.imgSize = {x: 44.8, y: 44.8}
-                problemCtrl.answerFontSize = 43
-            }
+            //if (index == 0) problemCtrl.activeBorderColor = "#54A318"
+            //else if (index == 1) problemCtrl.activeBorderColor = "#177AF2"
             
             problemCtrl.priorityNum = index
 
@@ -187,9 +78,78 @@ export default class Problem_3 {
     }
 
     SetEvent() {
+        let _embed2 = embed2.shadowRoot;
         this.chapter3_reset.addEventListener("click", (e) => {
             this.Clear()
         })
+
+        const rightNumbers = () => {
+            if(MainEvent.pageIdx === 2 && MainEvent.step === 'problem'){
+                // 오른쪽 숫자 구하기
+                const rightNum = Array.from({ length: 4 }, (_, i) => 
+                    document.querySelector(`#problem3 #p3_value${1 + i}`).textContent
+                ).join('');
+                console.log(rightNum);
+    
+                // 왼쪽 숫자 구하기
+                const leftNum = Array.from({ length: 4 }, (_, i) => 
+                    _embed2.querySelector(`#total_number_${3 - i} .num`).textContent
+                ).join('');
+                console.log(leftNum);
+    
+                console.log("Step=="+MainEvent.pageIdx);
+    
+                
+                // 오른쪽 , 왼쪽 숫자 비교
+                if(rightNum === leftNum){
+                    console.log("정답");
+                    // 인풋 활성화
+                    this.ProblemList1.forEach((problem, index) => {
+                        switch(index) {
+                            case 0:
+                                problem.SetAnswerText(this.value1*10000000)
+                                problem.Activate()
+                                break;
+                            case 1:
+                                problem.SetAnswerText(this.value2*1000000)
+                                problem.Activate()
+                                break;
+                            case 2:
+                                problem.SetAnswerText(this.value3*100000)
+                                problem.Activate()
+                                break;
+                            case 3:
+                                problem.SetAnswerText(this.value4*10000)
+                                problem.Activate()
+                                break;
+                        }
+                    })
+                    
+                    
+                }else{
+                    if(leftNum.length === 4 ){
+                        console.log("오답" + leftNum.length);
+                        _embed2.querySelector("#reset_card_popup_btn_ok").click();
+                        Array.from({ length: 4 }, (_, i) => 
+                            _embed2.querySelector(`#total_number_${3 - i} .num`).textContent = ''
+                        )
+                    }
+                    
+                }
+            }
+        }
+
+        // 숫자 클릭시 비교
+        _embed2.querySelector("#key_1").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_2").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_3").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_4").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_5").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_6").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_7").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_8").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_9").addEventListener("click", rightNumbers);
+        _embed2.querySelector("#key_0").addEventListener("click", rightNumbers);
     }
 
     Reset() {
@@ -215,17 +175,32 @@ export default class Problem_3 {
     }
 
     Clear() {
-        MainEvent.embed1.querySelector('.number_reset').click()
+        let _embed2 = embed2.shadowRoot;
+        //MainEvent.embed1.querySelector('.number_reset').click()
+        //let sec1 = MainEvent.embed1.querySelector("#total_number_5")
+        //console.log(sec1);
+        //let _embed2 = embed1.shadowRoot; 
+        var isActive = document.querySelector("#study_activity").classList.contains('active');
+        if (isActive) {
+            _embed2.querySelector("#reset_card_popup_btn_ok").click();
+        }else{
+            _embed2.querySelector("#total_number_3 .num").innerText = "5";
+            _embed2.querySelector("#total_number_2 .num").innerText = "2";
+            _embed2.querySelector("#total_number_1 .num").innerText = "7";
+            _embed2.querySelector("#total_number_0 .num").innerText = "8";
+        }
 
-        this.p3_inputZone1.innerHTML = ""
-        this.p3_inputZone2.innerHTML = ""
-        this.p3_inputZone3.innerHTML = ""
-        this.p3_inputZone4.innerHTML = ""
-
-        this.ProblemList1 = []
+        
 
         this.SetObject()
         this.SetProblem()
+
+        // 입력박스 초기화
+        this.ProblemList1.forEach((problem, index) => {
+            problem.DeActivate(true);
+            problem.element.style.boxShadow = ""
+            problem.imgDiv.style.opacity = 1
+        })
     }
 
 }

@@ -26,7 +26,6 @@ export default class Chapter_1_1 {
         this.SetProblem2()
 
         this.SetEvent()
-
     }
 
     SetProblem() {

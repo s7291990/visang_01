@@ -6,7 +6,6 @@ import Problem_1 from "./problem/Problem_1.js"
 import Problem_2 from "./problem/Problem_2.js"
 import Problem_3 from "./problem/Problem_3.js"
 import Problem_4 from "./problem/Problem_4.js"
-import Problem_5 from "./problem/Problem_5.js"
 
 export default class ProblemActivity {
     constructor() {
@@ -22,7 +21,6 @@ export default class ProblemActivity {
         this.problem_2 = new Problem_2()
         this.problem_3 = new Problem_3()
         this.problem_4 = new Problem_4()
-        this.problem_5 = new Problem_5()
 
         this.problemIdx = 0;
     }
@@ -78,7 +76,7 @@ export default class ProblemActivity {
                         this.problem_2.Clear()
                         break;
                     case 2:
-                        ShowEmbed(0)
+                        ShowEmbed(1)
                         this.problem_3.Clear()
                         break;
                     case 3:

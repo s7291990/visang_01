@@ -100,7 +100,7 @@ button.btn#reset_btn img {
   height: 76px;
 }
 button.btn#full_screen_btn {
-  left: 20px;
+  left: -20000000px;
   top: 46px;
 }
 button.btn#full_screen_btn img {
@@ -109,7 +109,7 @@ button.btn#full_screen_btn img {
 }
 #reset_card_btn {
   top: 283px;
-  left: 1600px;
+  left: -160000px;
 }
 #reset_card_btn img {
   width: 169px;

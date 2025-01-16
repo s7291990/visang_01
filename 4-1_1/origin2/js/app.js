@@ -7,6 +7,7 @@ import {
 } from "./common.js";
 import anime from "./anime.js";
 import { SetAriaLabel, SetTabIndex } from "./UDLController.js";
+import MainEvent from "../../remote/js/Activity/MainEvent.js";
 
 var metaUrl = import.meta.url;
 var root = null;
@@ -1223,8 +1224,11 @@ window.addEventListener("script-loaded", function (ev) {
     SetAriaLabel(root.querySelector("#answer_number_container").children[2], "십만 자리 정답 박스")
     SetAriaLabel(root.querySelector("#answer_number_container").children[3], "일만 자리 정답 박스")
 
-    cardNumbers = { 1: 8, 2: 7, 3: 2, 4: 5 };
-    setTotalNumber(cardNumbers);
+    if(MainEvent.step !== 'problem'){
+      cardNumbers = { 1: 8, 2: 7, 3: 2, 4: 5 };
+      setTotalNumber(cardNumbers);
+    }
+    
     
     expandBtn.classList.add('btn');
     expandedNumbers.forEach(

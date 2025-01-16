@@ -190,6 +190,13 @@ export default class Chapter_2_1 {
             // 버튼 활성화
             
         })
+
+        let _embed2 = embed2.shadowRoot; 
+        _embed2.querySelector("#reset_btn").click();
+        _embed2.querySelector("#total_number_3 .num").innerText = "5";
+        _embed2.querySelector("#total_number_2 .num").innerText = "2";
+        _embed2.querySelector("#total_number_1 .num").innerText = "7";
+        _embed2.querySelector("#total_number_0 .num").innerText = "8";
     }
 
     Clear() {
