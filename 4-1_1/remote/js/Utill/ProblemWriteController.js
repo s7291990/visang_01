@@ -12,10 +12,10 @@ export class ProblemWriteController {
 
         this.answer = `000`
         this.answerMaxLength = String(this.answer).length
-        this.answerFontSize = 40
+        this.answerFontSize = 34
 
         this.imgPath = MainEvent.ImgPath + "/common/pencil_icon.png"
-        this.imgSize = {x: 56, y: 56}
+        this.imgSize = {x: 34, y: 34}
 
         /** 클릭 사용가능 여부 */
         this.isActive = false

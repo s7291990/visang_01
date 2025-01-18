@@ -143,7 +143,7 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 48px;
     width:650px;
 }
 
@@ -155,7 +155,7 @@ button {
 
 .question_text {
     height: 54px;
-    font-size: 32px;
+    font-size: 34px;
     margin-left: 10px;
     display: flex;
     justify-content: center;
@@ -197,7 +197,6 @@ button {
     justify-content: center;
     cursor: pointer;
 }
-
 
 .click-img-div {
     position: absolute;
@@ -260,6 +259,7 @@ button {
     height: 80px;
     text-align: center;
     line-height: 80px;
+    color:#B73751;
 }
 
 
@@ -322,12 +322,12 @@ button {
 }
 .right-bottom-func .func-item-wrap{
     position: absolute;
-    left:1250px;
-    top:910px;
+    left:1270px;
+    top:898px;
     display: flex; 
     justify-content: flex-start;
     align-items: center;  
-    gap: 30px;
+    gap: 15px;
     margin-left:12px;
 }   
 .chapterView1{position:absolute;left:-2000000px;opacity:0;}

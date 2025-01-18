@@ -49,7 +49,7 @@ export default class Chapter_2_1 {
 
             this.ProblemList1.push(problemCtrl)
 
-            element.style.borderRadius = "28px"
+            element.style.borderRadius = "20px"
             //클릭 이벤트
             element.addEventListener("click", (e) => {
                 if (this.ProblemList1[index].isActive == false) {
@@ -146,18 +146,28 @@ export default class Chapter_2_1 {
         this.chapter2_reset.addEventListener("click", (e) => {
             this.Reset()
         })
+
         const chapterPrevBtn = document.querySelector('#chapterPrev02')
+        const imgPrevElement = chapterPrevBtn.querySelector('img');
+        const chapterNextBtn = document.querySelector('#chapterNext02')
+        const imgNextElement = chapterNextBtn.querySelector('img');
         if (chapterPrevBtn) {
             chapterPrevBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View03")
+                imgNextElement.src = './img/common/ico-next.svg'; 
+                imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+
             })
         }
-        const chapterNextBtn = document.querySelector('#chapterNext02')
+
         if (chapterNextBtn) {
             chapterNextBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View04");
+                imgNextElement.src = './img/common/ico-next-disabled.svg'; 
+                imgPrevElement.src = './img/common/ico-prev.svg'; 
             })
         }
+
     }
 
     Reset() {

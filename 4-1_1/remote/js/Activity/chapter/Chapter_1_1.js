@@ -62,46 +62,56 @@ export default class Chapter_1_1 {
                         chapter1.ProblemList2.forEach((problem, index) => {
                             switch(index) {
                                 case 0:
+                                    problem.activeBorderColor = "#C483D0"
                                     problem.SetAnswerText("60000")
                                     problem.Activate()
                                     break;
                                 case 1:
+                                    problem.activeBorderColor = "#FFA32E"
                                     problem.SetAnswerText("8000")
                                     problem.Activate()
                                     break;
                                 case 2:
+                                    problem.activeBorderColor = "#C2DC0D"
                                     problem.SetAnswerText("200")
                                     problem.Activate()
                                     break;
                                 case 3:
+                                    problem.activeBorderColor = "#56BFF2"
                                     problem.SetAnswerText("60")
                                     problem.Activate()
                                     break;
                                 case 4:
+                                    problem.activeBorderColor = "#FA7B9F"
                                     problem.SetAnswerText("3")
                                     problem.Activate()
                                     break;
                                 case 5:
+                                    problem.activeBorderColor = "#C483D0"
                                     problem.keyBoardType = "korean"
                                     problem.SetAnswerText("육만")
                                     problem.Activate()
                                     break;
                                 case 6:
+                                    problem.activeBorderColor = "#FFA32E"
                                     problem.keyBoardType = "korean"
                                     problem.SetAnswerText("팔천")
                                     problem.Activate()
                                     break;
                                 case 7:
+                                    problem.activeBorderColor = "#C2DC0D"
                                     problem.keyBoardType = "korean"
                                     problem.SetAnswerText("이백")
                                     problem.Activate()
                                     break;
                                 case 8:
+                                    problem.activeBorderColor = "#56BFF2"
                                     problem.keyBoardType = "korean"
                                     problem.SetAnswerText("육십")
                                     problem.Activate()
                                     break;
                                 case 9:
+                                    problem.activeBorderColor = "#FA7B9F"
                                     problem.keyBoardType = "korean"
                                     problem.SetAnswerText("삼")
                                     problem.Activate()
@@ -157,15 +167,23 @@ export default class Chapter_1_1 {
             this.Reset()
         })
         const chapterPrevBtn = document.querySelector('#chapterPrev')
+        const imgPrevElement = chapterPrevBtn.querySelector('img');
+        const chapterNextBtn = document.querySelector('#chapterNext')
+        const imgNextElement = chapterNextBtn.querySelector('img');
         if (chapterPrevBtn) {
             chapterPrevBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View01")
+                imgNextElement.src = './img/common/ico-next.svg'; 
+                imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+
             })
         }
-        const chapterNextBtn = document.querySelector('#chapterNext')
+
         if (chapterNextBtn) {
             chapterNextBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View02");
+                imgNextElement.src = './img/common/ico-next-disabled.svg'; 
+                imgPrevElement.src = './img/common/ico-prev.svg'; 
             })
         }
     }

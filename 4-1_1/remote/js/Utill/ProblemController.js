@@ -156,7 +156,7 @@ export class WriteProblemController {
         this.answerFontSize = 62
 
         this.imgPath = MainEvent.ImgPath + "/common/pencil_icon.png"
-        this.imgSize = {x: 56, y: 56}
+        this.imgSize = {x: 34, y: 34}
 
         /** 클릭 사용가능 여부 */
         this.isActive = false
