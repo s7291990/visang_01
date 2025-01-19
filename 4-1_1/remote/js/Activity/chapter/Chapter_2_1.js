@@ -10,6 +10,12 @@ export default class Chapter_2_1 {
 
         this.chapter2_reset = document.querySelector("#chapter2_reset")
 
+        this.chapter2_confirm1 = document.querySelector("#chapter2_confirm1")
+        this.chapter2_confirm1_close = document.querySelector("#chapter2_confirm1_close")
+
+        this.chapter2_confirm2 = document.querySelector("#chapter2_confirm2")
+        this.chapter2_confirm2_close = document.querySelector("#chapter2_confirm2_close")
+
         this.c2_multiText = document.querySelector("#c2_multiText")
     }
 
@@ -75,6 +81,8 @@ export default class Chapter_2_1 {
                             switch(index) {
                                 case 0:
                                     problem.keyBoardType = "korean"
+                                    problem.answerDiv.style.fontFamily = "Malgun"
+                                    problem.answerDiv.style.fontWeight = "bold"
                                     problem.SetAnswerText("오천이백칠십팔")
                                     problem.Activate()
                                     break;
@@ -91,7 +99,7 @@ export default class Chapter_2_1 {
                                     problem.Activate()
                                     break;
                                 case 4:
-                                    problem.SetAnswerText("380000")
+                                    problem.SetAnswerText("80000")
                                     problem.Activate()
                                     break;
                             }
@@ -168,6 +176,28 @@ export default class Chapter_2_1 {
             })
         }
 
+        // 확인하기
+        this.chapter2_confirm1.addEventListener("click", (e) => {
+            const chapter2Confirm01 = document.querySelector('#chapter2-confirm01')
+            chapter2Confirm01.classList.add('on');
+        })
+        // 확인하기 닫기
+        this.chapter2_confirm1_close.addEventListener("click", (e) => {
+            const chapter2Confirm01 = document.querySelector('#chapter2-confirm01')
+            chapter2Confirm01.classList.remove('on');
+        })
+
+        // 확인하기
+        this.chapter2_confirm2.addEventListener("click", (e) => {
+            const chapter2Confirm02 = document.querySelector('#chapter2-confirm02')
+            chapter2Confirm02.classList.add('on');
+        })
+        // 확인하기 닫기
+        this.chapter2_confirm2_close.addEventListener("click", (e) => {
+            const chapter2Confirm02 = document.querySelector('#chapter2-confirm02')
+            chapter2Confirm02.classList.remove('on');
+        })
+
     }
 
     Reset() {
@@ -191,6 +221,7 @@ export default class Chapter_2_1 {
                 problem.DeActivate(true);
                 problem.element.style.boxShadow = ""
                 problem.imgDiv.style.opacity = 1
+                problem.isComplete = false;
             })
             
             // 탭 첫번째로 이동
@@ -207,6 +238,25 @@ export default class Chapter_2_1 {
         _embed2.querySelector("#total_number_2 .num").innerText = "2";
         _embed2.querySelector("#total_number_1 .num").innerText = "7";
         _embed2.querySelector("#total_number_0 .num").innerText = "8";
+
+
+        _embed2.querySelector("#reset_btn").click();
+
+        const chapterPrevBtn = document.querySelector('#chapterPrev02')
+        const imgPrevElement = chapterPrevBtn.querySelector('img');
+        const chapterNextBtn = document.querySelector('#chapterNext02')
+        const imgNextElement = chapterNextBtn.querySelector('img');
+        imgNextElement.src = './img/common/ico-next.svg'; 
+        imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+
+        // 초기화
+        MainEvent.chapter2Active4 = false;
+        MainEvent.chapter2Active3 = false;
+        MainEvent.chapter2Active2 = false;
+        MainEvent.chapter2Active1 = false;
+
+        MainEvent.chapter2Array = [];
+        MainEvent.chapter2HanglArray = [];
     }
 
     Clear() {

@@ -6,6 +6,7 @@ import {
 } from "./common.js";
 import anime from "./anime.js";
 import { SetAriaLabel, SetTabIndex } from "./UDLController.js";
+import { MainEvent } from "../../remote/js/Activity/MainEvent.js";
 
 var metaUrl = import.meta.url;
 var root = null;
@@ -90,6 +91,7 @@ window.addEventListener("script-loaded", function (ev) {
       update: () => {
         if (keyboard.style.opacity === "1") {
           pauseHandAnimation();
+        
         }
       },
       complete: () => {
@@ -446,6 +448,10 @@ window.addEventListener("script-loaded", function (ev) {
     );
     if (validateAnswer(unit)) {
       console.log("정답")
+      
+      const mainEvent = new MainEvent();
+      mainEvent.SetChapter1Active(unit, true);
+
       isFail = false;
       isNumbersValidated[unit] = true;
       // correct answer

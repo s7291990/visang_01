@@ -123,6 +123,8 @@ export default class Problem_2 {
                         switch(index) {
                             case 0:
                                 problem.keyBoardType = "korean"
+                                problem.answerDiv.style.fontFamily = "Malgun"
+                                problem.answerDiv.style.fontWeight = "bold"
                                 problem.SetAnswerText(rightNumber)
                                 problem.Activate()
                                 break;

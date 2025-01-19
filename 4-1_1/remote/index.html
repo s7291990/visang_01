@@ -167,6 +167,7 @@
                                         <div class="ch1_default_calc batang" style="font-size:40px;">＋</div>
                                         <div class="writeBox c1_2" style="border-width:5px;width: 60px;font-size:34px;height:65px;border-radius:18px;"></div>
                                     </div>
+                                    <button type="button" id="chapter1_confirm1" class="confirm_btn" disabled><img src="./img/common/btn_confirm.png" alt="확인하기" /></button>
                                 </div>
                                 <div id="chapter1View02" class="chapterView1">
                                     <div class="question_container">
@@ -184,6 +185,7 @@
                                         <div class="writeBox c1_2 malgun" style="width: 130px;height:82px;border-radius:20px;border-width:5px;font-family: 'Malgun' !important;"></div>
                                         <div class="writeBox c1_2 malgun" style="width: 130px;height:82px;border-radius:20px;border-width:5px;font-family: 'Malgun' !important;"></div>
                                     </div>
+                                    <button type="button" id="chapter1_confirm2" class="confirm_btn" disabled><img src="./img/common/btn_confirm.png" alt="확인하기" /></button>
                                 </div>
 
                                 <div class="right-bottom-func">
@@ -246,6 +248,8 @@
                                             <div class="ch1_default_calc" style="color:#460096;font-size:42px;">만</div>
                                         </div>
                                     </div>
+
+                                    <button type="button" id="chapter2_confirm1" class="confirm_btn" disabled><img src="./img/common/btn_confirm.png" alt="확인하기" /></button>
     
      
      
@@ -280,6 +284,8 @@
                                             <div class="writeBox c2_2" style="width: 254px;height:82px;border-radius:20px;border-width:5px;"></div>
                                         </div>
                                     </div>
+
+                                    <button type="button" id="chapter2_confirm2" class="confirm_btn" disabled><img src="./img/common/btn_confirm.png" alt="확인하기" /></button>
                                     
                                      
                                 </div>
@@ -539,6 +545,40 @@
                 <div id="loading" style="display: none;">
                     <img src="./img/common/dim_popup.png" alt="" style="width: 1920px; height: 1020px; position: absolute; top: 0; left: 0; z-index: 3;">
                     <div style="color:white; z-index: 4; width: 1920px; height: 1020px; position: absolute; top: 500px; left: 760px; font-size: 38px;" class="malgun_bd">이미지를 다운로드 중입니다...</div>
+                </div>
+
+                <div id="chapter1-confirm01" class="confirm-popup">
+                    <div class="msg">작성한 수와 각 자리의 숫자가 나타내는 값을 
+                        <br />비교해 보세요.
+                        <button type="button" id="chapter1_confirm1_close" class="btn-confirm-close"><img src="./img/common/btn_close.png" /></button>
+                    </div>
+                    <div class="chapter-mask01"><img src="./img/common/etc-chapter1-mask01.png" /></div>
+                    <div class="chapter-mask02"><img src="./img/common/etc-chapter1-mask02.png" /></div>
+                </div> 
+
+                <div id="chapter1-confirm02" class="confirm-popup">
+                    <div class="msg">정확하게 읽었는지 확인해 보세요. 
+                        <button type="button" id="chapter1_confirm2_close" class="btn-confirm-close"><img src="./img/common/btn_close.png" /></button>
+                    </div>
+                    <div class="chapter-mask03"><img src="./img/common/etc-chapter1-mask03.png" /></div>
+                    <div class="chapter-mask04"><img src="./img/common/etc-chapter1-mask04.png" /></div>
+                </div>
+                
+                <div id="chapter2-confirm01" class="confirm-popup">
+                    <div class="msg">정확하게 읽었는지 확인해 보세요.
+                        <button type="button" id="chapter2_confirm1_close" class="btn-confirm-close"><img src="./img/common/btn_close.png" /></button>
+                    </div>
+                    <div class="chapter-mask05"><img src="./img/common/etc-chapter2-mask01.png" /></div>
+                    <div class="chapter-mask06"><img src="./img/common/etc-chapter2-mask02.png" /></div>
+                </div> 
+
+                <div id="chapter2-confirm02" class="confirm-popup">
+                    <div class="msg">작성한 수와 각 자리의 숫자가 나타내는 값을 
+                        <br />비교해 보세요.
+                        <button type="button" id="chapter2_confirm2_close" class="btn-confirm-close"><img src="./img/common/btn_close.png" /></button>
+                    </div>
+                    <div class="chapter-mask07"><img src="./img/common/etc-chapter2-mask03.png" /></div>
+                    <div class="chapter-mask08"><img src="./img/common/etc-chapter2-mask04.png" /></div>
                 </div>
 
             </div>

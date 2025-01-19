@@ -17,6 +17,26 @@ export class MainEvent {
 
         this.top_container = document.querySelector("#top_container")
 
+        // 챕터 1
+        this.chapter1Active5 = false;
+        this.chapter1Active4 = false;
+        this.chapter1Active3 = false;
+        this.chapter1Active2 = false;
+        this.chapter1Active1 = false;
+
+        
+        this.chapter1Array = [];
+        this.chapter1HanglArray = [];
+
+        // 챕터 2
+        this.chapter2Active4 = false;
+        this.chapter2Active3 = false;
+        this.chapter2Active2 = false;
+        this.chapter2Active1 = false;
+
+        this.chapter2Array = [];
+        this.chapter2HanglArray = [];
+
         if (!MainEvent.instance) {
             MainEvent.instance = this;
         }
@@ -124,6 +144,21 @@ export class MainEvent {
 
     /** 초기화 */
     Clear() {
+        
+    }
+
+    SetChapter1Active(unit, state) {
+        if(unit === "5"){
+            this.chapter1Active5 = state;
+        }else if(unit === "4"){
+            this.chapter1Active4 = state;
+        }else if(unit === "3"){
+            this.chapter1Active3 = state;
+        }else if(unit === "2"){
+            this.chapter1Active2 = state;
+        }else if(unit === "1"){
+            this.chapter1Active1 = state;
+        }
         
     }
 

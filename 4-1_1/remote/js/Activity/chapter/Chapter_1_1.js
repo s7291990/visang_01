@@ -14,6 +14,11 @@ export default class Chapter_1_1 {
         this.c1_embVal_2 = document.querySelector("#c1_embVal_2")
 
         this.chapter1_reset = document.querySelector("#chapter1_reset")
+        this.chapter1_confirm1 = document.querySelector("#chapter1_confirm1")
+        this.chapter1_confirm1_close = document.querySelector("#chapter1_confirm1_close")
+
+        this.chapter1_confirm2 = document.querySelector("#chapter1_confirm2")
+        this.chapter1_confirm2_close = document.querySelector("#chapter1_confirm2_close")
 
         this.popup = document.querySelector("#popup")
     }
@@ -39,6 +44,9 @@ export default class Chapter_1_1 {
         this.answerList = ["다섯자리 수", "만의 자리"]
         this.answerFontSizeList = [34, 34]
 
+
+        
+
         this.inputBoxList_1.forEach((element, index) => {
             let problemCtrl = new ProblemClickController(element, this.problemEmmiter_1)
             problemCtrl.priorityStandardList = this.priorityStandardList_1
@@ -51,73 +59,105 @@ export default class Chapter_1_1 {
 
             this.ProblemList1.push(problemCtrl)
 
+            const chapter1ActiveInput = () => {
+                let chapter1 = MainEvent.chapter.chapter_1_1
+                let unit5 = MainEvent.chapter1Active5
+                let unit4 = MainEvent.chapter1Active4
+                let unit3 = MainEvent.chapter1Active3
+                let unit2 = MainEvent.chapter1Active2
+                let unit1 = MainEvent.chapter1Active1
+                chapter1.ProblemList2.forEach((problem, index) => {
+                    if(unit5){
+                        if (index === 0) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#C483D0"
+                            problem.SetAnswerText("60000")
+                            problem.Activate()
+                        }else if (index === 5) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#C483D0"
+                            problem.keyBoardType = "korean"
+                            problem.answerDiv.style.fontFamily = "Malgun"
+                            problem.answerDiv.style.fontWeight = "bold"
+                            problem.SetAnswerText("육만")
+                            problem.Activate()
+                        }
+                    }
+                    if(unit4){
+                        if (index === 1) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#FFA32E"
+                            problem.SetAnswerText("8000")
+                            problem.Activate()
+                        }else if (index === 6) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#FFA32E"
+                            problem.keyBoardType = "korean"
+                            problem.answerDiv.style.fontFamily = "Malgun"
+                            problem.answerDiv.style.fontWeight = "bold"
+                            problem.SetAnswerText("팔천")
+                            problem.Activate()
+                        }
+                    }
+                    if(unit3){
+                        if (index === 2) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#C2DC0D"
+                            problem.SetAnswerText("200")
+                            problem.Activate()
+                        }else if (index === 7) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#C2DC0D"
+                            problem.keyBoardType = "korean"
+                            problem.answerDiv.style.fontFamily = "Malgun"
+                            problem.answerDiv.style.fontWeight = "bold"
+                            problem.SetAnswerText("이백")
+                            problem.Activate()
+                        }
+                    }
+                    if(unit2){
+                        if (index === 3) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#56BFF2"
+                            problem.SetAnswerText("60")
+                            problem.Activate()
+                        }else if (index === 8) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#56BFF2"
+                            problem.keyBoardType = "korean"
+                            problem.answerDiv.style.fontFamily = "Malgun"
+                            problem.answerDiv.style.fontWeight = "bold"
+                            problem.SetAnswerText("육십")
+                            problem.Activate()
+                        }
+                    }
+                    if(unit1){
+                        if (index === 4) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#FA7B9F"
+                            problem.SetAnswerText("3")
+                            problem.Activate()
+                        }else if (index === 9) { // case 3에 해당하는 조건
+                            problem.activeBorderColor = "#FA7B9F"
+                            problem.keyBoardType = "korean"
+                            problem.answerDiv.style.fontFamily = "Malgun"
+                            problem.answerDiv.style.fontWeight = "bold"
+                            problem.SetAnswerText("삼")
+                            problem.Activate()
+                        }
+                    }
+                    
+                });
+            }
+            let _embed1 = embed1.shadowRoot;
+            _embed1.querySelector("#key_1").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_2").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_3").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_4").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_5").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_6").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_7").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_8").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_9").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_0").addEventListener("click", chapter1ActiveInput);
+            
             //클릭 이벤트
             element.addEventListener("click", (e) => {
                 switch(index) {
                     case 0:
                         break;
                     case 1:
-                        // 버튼 활성화
-                        let chapter1 = MainEvent.chapter.chapter_1_1
-                        chapter1.ProblemList2.forEach((problem, index) => {
-                            switch(index) {
-                                case 0:
-                                    problem.activeBorderColor = "#C483D0"
-                                    problem.SetAnswerText("60000")
-                                    problem.Activate()
-                                    break;
-                                case 1:
-                                    problem.activeBorderColor = "#FFA32E"
-                                    problem.SetAnswerText("8000")
-                                    problem.Activate()
-                                    break;
-                                case 2:
-                                    problem.activeBorderColor = "#C2DC0D"
-                                    problem.SetAnswerText("200")
-                                    problem.Activate()
-                                    break;
-                                case 3:
-                                    problem.activeBorderColor = "#56BFF2"
-                                    problem.SetAnswerText("60")
-                                    problem.Activate()
-                                    break;
-                                case 4:
-                                    problem.activeBorderColor = "#FA7B9F"
-                                    problem.SetAnswerText("3")
-                                    problem.Activate()
-                                    break;
-                                case 5:
-                                    problem.activeBorderColor = "#C483D0"
-                                    problem.keyBoardType = "korean"
-                                    problem.SetAnswerText("육만")
-                                    problem.Activate()
-                                    break;
-                                case 6:
-                                    problem.activeBorderColor = "#FFA32E"
-                                    problem.keyBoardType = "korean"
-                                    problem.SetAnswerText("팔천")
-                                    problem.Activate()
-                                    break;
-                                case 7:
-                                    problem.activeBorderColor = "#C2DC0D"
-                                    problem.keyBoardType = "korean"
-                                    problem.SetAnswerText("이백")
-                                    problem.Activate()
-                                    break;
-                                case 8:
-                                    problem.activeBorderColor = "#56BFF2"
-                                    problem.keyBoardType = "korean"
-                                    problem.SetAnswerText("육십")
-                                    problem.Activate()
-                                    break;
-                                case 9:
-                                    problem.activeBorderColor = "#FA7B9F"
-                                    problem.keyBoardType = "korean"
-                                    problem.SetAnswerText("삼")
-                                    problem.Activate()
-                                    break;
-                            }
-                        })
                         break;
                     default:
                         break;
@@ -186,6 +226,28 @@ export default class Chapter_1_1 {
                 imgPrevElement.src = './img/common/ico-prev.svg'; 
             })
         }
+
+        // 확인하기
+        this.chapter1_confirm1.addEventListener("click", (e) => {
+            const chapter1Confirm01 = document.querySelector('#chapter1-confirm01')
+            chapter1Confirm01.classList.add('on');
+        })
+        // 확인하기 닫기
+        this.chapter1_confirm1_close.addEventListener("click", (e) => {
+            const chapter1Confirm01 = document.querySelector('#chapter1-confirm01')
+            chapter1Confirm01.classList.remove('on');
+        })
+
+        // 확인하기
+        this.chapter1_confirm2.addEventListener("click", (e) => {
+            const chapter1Confirm02 = document.querySelector('#chapter1-confirm02')
+            chapter1Confirm02.classList.add('on');
+        })
+        // 확인하기 닫기
+        this.chapter1_confirm2_close.addEventListener("click", (e) => {
+            const chapter1Confirm02 = document.querySelector('#chapter1-confirm02')
+            chapter1Confirm02.classList.remove('on');
+        })
     }
 
     Reset() {
@@ -202,10 +264,12 @@ export default class Chapter_1_1 {
             
             // 입력박스 초기화
             let chapter1 = MainEvent.chapter.chapter_1_1
+            console.log(chapter1.ProblemList2);
             chapter1.ProblemList2.forEach((problem, index) => {
                 problem.DeActivate(true);
                 problem.element.style.boxShadow = ""
                 problem.imgDiv.style.opacity = 1
+                problem.isComplete = false;
             })
             
             // 탭 첫번째로 이동
@@ -215,6 +279,25 @@ export default class Chapter_1_1 {
             // 버튼 활성화
             
         })
+        let _embed1 = embed1.shadowRoot; 
+        _embed1.querySelector("#reset_btn").click();
+
+        const chapterPrevBtn = document.querySelector('#chapterPrev')
+        const imgPrevElement = chapterPrevBtn.querySelector('img');
+        const chapterNextBtn = document.querySelector('#chapterNext')
+        const imgNextElement = chapterNextBtn.querySelector('img');
+        imgNextElement.src = './img/common/ico-next.svg'; 
+        imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+
+        // 초기화
+        MainEvent.chapter1Active5 = false;
+        MainEvent.chapter1Active4 = false;
+        MainEvent.chapter1Active3 = false;
+        MainEvent.chapter1Active2 = false;
+        MainEvent.chapter1Active1 = false;
+
+        MainEvent.chapter1Array = [];
+        MainEvent.chapter1HanglArray = [];
 
         // let calResult = MainEvent.embed1.querySelector('.btn_off3');
 
