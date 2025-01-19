@@ -198,6 +198,19 @@ export default class Chapter_2_1 {
             chapter2Confirm02.classList.remove('on');
         })
 
+        let _embed2 = embed2.shadowRoot; 
+        let answerBtn = _embed2.querySelectorAll(".answer_number");
+        answerBtn.forEach(button => {
+            button.addEventListener('click', function() {
+              const unitValue = button.getAttribute('data-unit');
+              // 마지막 클릭시
+              if(unitValue === "1" && MainEvent.step === "chapter"){
+                
+              }
+            });
+        });
+
+
     }
 
     Reset() {
