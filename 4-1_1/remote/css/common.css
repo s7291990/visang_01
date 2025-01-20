@@ -350,10 +350,37 @@ button {
 .chapterView2{position:absolute;left:-2000000px;opacity:0;}
 .chapterView2.on{position:static;opacity:1;}
 
-.confirm-popup{width:100%;height:100%;overflow:hidden;position:fixed;left:0;top:0;z-index:10;display:none;
+.confirm-popup{width:100%;height:100%;position:fixed;left:0;top:0;z-index:10;display:none;
     background-color: rgba(0,0,0,.6);
     justify-content:center;align-items:start;
 }
+.confirm-popup:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 2130px;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 100;
+    transform: translateX(-100%);
+}
+.confirm-popup:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    display: block;
+    left: 1920px;
+    width: 2130px;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 100;
+}
+#chapter1-confirm01.confirm-popup{background:url(../img/common/bg-dim-chapter01.png) no-repeat center top;background-size:2130px 1060px;}
+#chapter1-confirm02.confirm-popup{background:url(../img/common/bg-dim-chapter02.png) no-repeat center top;background-size:2130px 1060px;}
+#chapter2-confirm01.confirm-popup{background:url(../img/common/bg-dim-chapter03.png) no-repeat center top;background-size:2130px 1060px;}
+#chapter2-confirm02.confirm-popup{background:url(../img/common/bg-dim-chapter04.png) no-repeat center top;background-size:2130px 1060px;}
 .confirm-popup.on{display:flex;}
 .chapter-mask01{padding:10px;position:absolute;left:706px;top:356px;border-radius:20px;background:#fff;width:340px;height:auto;overflow:Hidden;}
 .chapter-mask01 img{width:100%;}
