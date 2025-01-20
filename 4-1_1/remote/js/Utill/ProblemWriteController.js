@@ -76,7 +76,7 @@ export class ProblemWriteController {
                 this.element.style.boxShadow = "";
 
                 if (this.answerDiv.textContent == "") {
-                    this.imgDiv.style.opacity = 1
+                    //this.imgDiv.style.opacity = 1
                 } else {
                     if (this.isUseAnswer) {
                         this.CheckAnswer()
@@ -178,21 +178,90 @@ export class ProblemWriteController {
             if(this.answerDiv.textContent === this.answer){
                 this.isUseAnswer = true;
             }
+
+            // 확인 버튼 활성화
+            if (this.keyBoardType == "number") {
+                if (this.answerDiv.textContent.length == this.answerMaxLength) {
+                    console.log(this.isComplete);
+                    if (this.answerDiv.textContent !== "") {
+                        if(!this.isComplete){
+                            let init = new Date().getTime(); 
+                            const randomNumbers = Math.floor(Math.random()) + init;
+                            
+                            if(this.element.classList[1] === "c1_2"){
+                                MainEvent.chapter1Array.push(randomNumbers);
+                                console.log(MainEvent.chapter1Array);
+                                this.isComplete = true;
+                                if(MainEvent.chapter1Array.length === 5){
+                                    const chapter1_confirm1 = document.querySelector("#chapter1_confirm1");
+                                    chapter1_confirm1.disabled = false;
+                                }
+                            }
+        
+                            if(this.element.classList[1] === "c2_2"){
+                                MainEvent.chapter2Array.push(randomNumbers);
+                                this.isComplete = true;
+                                if(MainEvent.chapter2Array.length === 4){
+                                    const chapter2_confirm2 = document.querySelector("#chapter2_confirm2");
+                                    chapter2_confirm2.disabled = false;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }else if (this.keyBoardType == "korean"){
+                if (this.answerDiv.textContent.length == this.answerMaxLength) {
+                    console.log(this.isComplete);
+                    if (this.answerDiv.textContent !== "") {
+                        if(!this.isComplete){
+                            
+                            let init = new Date().getTime(); 
+                            const randomNumbers = Math.floor(Math.random()) + init;
+                            
+                            if(this.element.classList[1] === "c1_2"){
+                                MainEvent.chapter1HanglArray.push(randomNumbers);
+                                console.log(MainEvent.chapter1HanglArray);
+                                this.isComplete = true;
+                                if(MainEvent.chapter1HanglArray.length === 5){
+                                    const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
+                                    chapter1_confirm2.disabled = false;
+                                }
+                            }
+        
+                            if(this.element.classList[1] === "c2_2"){
+                                MainEvent.chapter2HanglArray.push(randomNumbers);
+                                this.isComplete = true;
+                                if(MainEvent.chapter2HanglArray.length === 1){
+                                    const chapter2_confirm1 = document.querySelector("#chapter2_confirm1");
+                                    chapter2_confirm1.disabled = false;
+                                }
+                            }
+                              
+                        }
+                        
+                    }
+                }
+            }
+            
+            
+            
         
             if (this.isUseAnswer) {
                 //키보드 타입이 숫자일때
                 if (this.keyBoardType == "number") {
-                    console.log(this.answerDiv.textContent.length, this.answerMaxLength);
+                    //console.log(this.answerDiv.textContent.length, this.answerMaxLength);
                     if (this.answerDiv.textContent.length == this.answerMaxLength) {
                         this.CheckAnswer()
                         
                         // 확인 버튼 활성화
-                        //this.chapter1Array
+                        /*
                         let init = new Date().getTime(); 
                         const randomNumbers = Math.floor(Math.random()) + init;
                         if(this.element.classList[1] === "c1_2"){
                             MainEvent.chapter1Array.push(randomNumbers);
                         }
+                        console.log(MainEvent.chapter1Array);
                         if(MainEvent.chapter1Array.length === 5){
                             const chapter1_confirm1 = document.querySelector("#chapter1_confirm1");
                             chapter1_confirm1.disabled  = false;
@@ -200,13 +269,14 @@ export class ProblemWriteController {
 
                         if(this.element.classList[1] === "c2_2"){
                             MainEvent.chapter2Array.push(randomNumbers);
-                            console.log(MainEvent.chapter2Array);
+                            //console.log(MainEvent.chapter2Array);
                         }
                     
                         if(MainEvent.chapter2Array.length === 4){
                             const chapter2_confirm2 = document.querySelector("#chapter2_confirm2");
                             chapter2_confirm2.disabled  = false;
                         }
+                             */
 
                     }
                         
@@ -223,25 +293,7 @@ export class ProblemWriteController {
                         if (this.answerDiv.textContent == this.answer) {
                             this.CheckAnswer()
 
-                            // 확인 버튼 활성화
-                            let init = new Date().getTime(); 
-                            const randomNumbers = Math.floor(Math.random()) + init;
-                            if(this.element.classList[1] === "c1_2"){
-                                MainEvent.chapter1HanglArray.push(randomNumbers);
-                            }
-                            //console.log(MainEvent.chapter1HanglArray);
-                            if(MainEvent.chapter1HanglArray.length === 5){
-                                const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
-                                chapter1_confirm2.disabled  = false;
-                            }
-
-                            if(this.element.classList[1] === "c2_2"){
-                                MainEvent.chapter2HanglArray.push(randomNumbers);
-                            }
-                            if(MainEvent.chapter2HanglArray.length === 1){
-                                const chapter2_confirm1 = document.querySelector("#chapter2_confirm1");
-                                chapter2_confirm1.disabled  = false;
-                            }
+                            
                         }
     
                         //글자수 마지막에서 글자가 완성되었을 때
@@ -259,7 +311,7 @@ export class ProblemWriteController {
                 //키보드 타입이 숫자일때
                 if (this.keyBoardType == "number") {
                     if (this.answerDiv.textContent.length == this.answerMaxLength) {
-                        this.answerDiv.textContent = "";
+                        //this.answerDiv.textContent = "";
                     }
                         
                 }
@@ -272,7 +324,7 @@ export class ProblemWriteController {
         //---------------- 트리거 이벤트 ---------------
         this.eventEmitter.on("click-problem", (data) => {
             if (this.answerDiv.textContent === "" && this.isActive == true) {
-                this.imgDiv.style.opacity = "1"
+                //this.imgDiv.style.opacity = "1"
             }
 
             this.element.style.boxShadow = "";
@@ -348,6 +400,7 @@ export class ProblemWriteController {
         if (this.answerDiv.textContent == this.answer) {
             if ((this.isMobile || this.isIpad) && this.keyBoardType == "number") KeyBoardOff();
             this.isComplete = true
+            this.answerDiv.style.color = "#B73751";
             this.element.style.boxShadow = ""
             this.TriggerEvent("write-problem")
             
@@ -359,8 +412,8 @@ export class ProblemWriteController {
             this.isActive = false
             this.animation = AnimationHelper.Wrong(this.answerDiv, () => {
                 if ((this.isMobile || this.isIpad) && this.keyBoardType == "number") KeyBoardOff();
-                this.answerDiv.textContent = ""
-                this.imgDiv.style.opacity = 1
+                //this.answerDiv.textContent = ""
+                //this.imgDiv.style.opacity = 1
                 this.element.style.boxShadow = ""
                 this.isActive = true
                 this.FailEvent(this)
@@ -427,6 +480,7 @@ export class ProblemWriteController {
         //정답 텍스트 추가
         if (this.answerDiv) this.answerDiv.remove()
         this.answerDiv = document.createElement("div")
+        this.answerDiv.style.color = "#000000";
         this.answerDiv.style.fontSize = this.answerFontSize + "px"
         this.answerDiv.innerHTML = ``
         this.answerDiv.style.fontFamily = this.defaultFontFamily

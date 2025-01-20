@@ -44,7 +44,33 @@ export default class Chapter_1_1 {
         this.answerList = ["다섯자리 수", "만의 자리"]
         this.answerFontSizeList = [34, 34]
 
-
+        const unitConfig = {
+            unit5: {
+                color: "#C483D0",
+                answers: ["60000", "육만"],
+                indices: [0, 5]
+            },
+            unit4: {
+                color: "#FFA32E",
+                answers: ["8000", "팔천"],
+                indices: [1, 6]
+            },
+            unit3: {
+                color: "#C2DC0D",
+                answers: ["200", "이백"],
+                indices: [2, 7]
+            },
+            unit2: {
+                color: "#56BFF2",
+                answers: ["60", "육십"],
+                indices: [3, 8]
+            },
+            unit1: {
+                color: "#FA7B9F",
+                answers: ["3", "삼"],
+                indices: [4, 9]
+            }
+        };
         
 
         this.inputBoxList_1.forEach((element, index) => {
@@ -67,76 +93,22 @@ export default class Chapter_1_1 {
                 let unit2 = MainEvent.chapter1Active2
                 let unit1 = MainEvent.chapter1Active1
                 chapter1.ProblemList2.forEach((problem, index) => {
-                    if(unit5){
-                        if (index === 0) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#C483D0"
-                            problem.SetAnswerText("60000")
-                            problem.Activate()
-                        }else if (index === 5) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#C483D0"
-                            problem.keyBoardType = "korean"
-                            problem.answerDiv.style.fontFamily = "Malgun"
-                            problem.answerDiv.style.fontWeight = "bold"
-                            problem.SetAnswerText("육만")
-                            problem.Activate()
+                    Object.entries(unitConfig).forEach(([unit, config]) => {
+                        if (eval(unit)) {  // unit5, unit4 등의 변수 평가
+                            if (config.indices.includes(index) && !problem.isComplete) {
+                                const isKorean = index >= 5;  // 5 이상의 인덱스는 한글 답안
+                                
+                                problem.activeBorderColor = config.color;
+                                if (isKorean) {
+                                    problem.keyBoardType = "korean";
+                                    problem.answerDiv.style.fontFamily = "Malgun";
+                                    problem.answerDiv.style.fontWeight = "bold";
+                                }
+                                problem.SetAnswerText(config.answers[isKorean ? 1 : 0]);
+                                problem.Activate();
+                            }
                         }
-                    }
-                    if(unit4){
-                        if (index === 1) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#FFA32E"
-                            problem.SetAnswerText("8000")
-                            problem.Activate()
-                        }else if (index === 6) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#FFA32E"
-                            problem.keyBoardType = "korean"
-                            problem.answerDiv.style.fontFamily = "Malgun"
-                            problem.answerDiv.style.fontWeight = "bold"
-                            problem.SetAnswerText("팔천")
-                            problem.Activate()
-                        }
-                    }
-                    if(unit3){
-                        if (index === 2) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#C2DC0D"
-                            problem.SetAnswerText("200")
-                            problem.Activate()
-                        }else if (index === 7) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#C2DC0D"
-                            problem.keyBoardType = "korean"
-                            problem.answerDiv.style.fontFamily = "Malgun"
-                            problem.answerDiv.style.fontWeight = "bold"
-                            problem.SetAnswerText("이백")
-                            problem.Activate()
-                        }
-                    }
-                    if(unit2){
-                        if (index === 3) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#56BFF2"
-                            problem.SetAnswerText("60")
-                            problem.Activate()
-                        }else if (index === 8) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#56BFF2"
-                            problem.keyBoardType = "korean"
-                            problem.answerDiv.style.fontFamily = "Malgun"
-                            problem.answerDiv.style.fontWeight = "bold"
-                            problem.SetAnswerText("육십")
-                            problem.Activate()
-                        }
-                    }
-                    if(unit1){
-                        if (index === 4) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#FA7B9F"
-                            problem.SetAnswerText("3")
-                            problem.Activate()
-                        }else if (index === 9) { // case 3에 해당하는 조건
-                            problem.activeBorderColor = "#FA7B9F"
-                            problem.keyBoardType = "korean"
-                            problem.answerDiv.style.fontFamily = "Malgun"
-                            problem.answerDiv.style.fontWeight = "bold"
-                            problem.SetAnswerText("삼")
-                            problem.Activate()
-                        }
-                    }
+                    });
                     
                 });
             }
@@ -213,8 +185,8 @@ export default class Chapter_1_1 {
         if (chapterPrevBtn) {
             chapterPrevBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View01")
-                imgNextElement.src = './img/common/ico-next.svg'; 
-                imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+                imgNextElement.src = './img/common/ico-next.png'; 
+                imgPrevElement.src = './img/common/ico-prev-disabled.png'; 
 
             })
         }
@@ -222,8 +194,8 @@ export default class Chapter_1_1 {
         if (chapterNextBtn) {
             chapterNextBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View02");
-                imgNextElement.src = './img/common/ico-next-disabled.svg'; 
-                imgPrevElement.src = './img/common/ico-prev.svg'; 
+                imgNextElement.src = './img/common/ico-next-disabled.png'; 
+                imgPrevElement.src = './img/common/ico-prev.png'; 
             })
         }
 
@@ -268,8 +240,10 @@ export default class Chapter_1_1 {
             chapter1.ProblemList2.forEach((problem, index) => {
                 problem.DeActivate(true);
                 problem.element.style.boxShadow = ""
-                problem.imgDiv.style.opacity = 1
+                //problem.imgDiv.style.opacity = 1
                 problem.isComplete = false;
+                problem.isActive = false;
+                problem.answerDiv.style.color = "#000000";
             })
             
             // 탭 첫번째로 이동
@@ -286,8 +260,8 @@ export default class Chapter_1_1 {
         const imgPrevElement = chapterPrevBtn.querySelector('img');
         const chapterNextBtn = document.querySelector('#chapterNext')
         const imgNextElement = chapterNextBtn.querySelector('img');
-        imgNextElement.src = './img/common/ico-next.svg'; 
-        imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+        imgNextElement.src = './img/common/ico-next.png'; 
+        imgPrevElement.src = './img/common/ico-prev-disabled.png'; 
 
         // 초기화
         MainEvent.chapter1Active5 = false;
@@ -298,6 +272,9 @@ export default class Chapter_1_1 {
 
         MainEvent.chapter1Array = [];
         MainEvent.chapter1HanglArray = [];
+
+        chapter1_confirm1.disabled = true;
+        chapter1_confirm2.disabled = true;
 
         // let calResult = MainEvent.embed1.querySelector('.btn_off3');
 

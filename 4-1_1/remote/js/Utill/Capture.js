@@ -26,7 +26,7 @@ export function StartCapture() {
 
         const link = document.createElement('a');
         link.href = imgData;
-        link.download = '3학년_2학기_4단원_3~4차시_'+ titleText +'.png';
+        link.download = '4학년_1학기_4단원_3~4차시_'+ titleText +'.png';
         link.click();
         document.querySelector("#loading").style.display = "none"
     }).catch(function(error) {

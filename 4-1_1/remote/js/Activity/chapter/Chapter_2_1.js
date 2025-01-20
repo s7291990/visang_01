@@ -162,8 +162,8 @@ export default class Chapter_2_1 {
         if (chapterPrevBtn) {
             chapterPrevBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View03")
-                imgNextElement.src = './img/common/ico-next.svg'; 
-                imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+                imgNextElement.src = './img/common/ico-next.png'; 
+                imgPrevElement.src = './img/common/ico-prev-disabled.png'; 
 
             })
         }
@@ -171,8 +171,8 @@ export default class Chapter_2_1 {
         if (chapterNextBtn) {
             chapterNextBtn.addEventListener('click', () => {
                 this.ChangeChapterView("chapter1View04");
-                imgNextElement.src = './img/common/ico-next-disabled.svg'; 
-                imgPrevElement.src = './img/common/ico-prev.svg'; 
+                imgNextElement.src = './img/common/ico-next-disabled.png'; 
+                imgPrevElement.src = './img/common/ico-prev.png'; 
             })
         }
 
@@ -233,8 +233,11 @@ export default class Chapter_2_1 {
             chapter2.ProblemList2.forEach((problem, index) => {
                 problem.DeActivate(true);
                 problem.element.style.boxShadow = ""
-                problem.imgDiv.style.opacity = 1
+                //problem.imgDiv.style.opacity = 1
+                problem.isComplee = false;
                 problem.isComplete = false;
+                problem.isActive = false;
+                problem.answerDiv.style.color = "#000000";
             })
             
             // 탭 첫번째로 이동
@@ -259,8 +262,8 @@ export default class Chapter_2_1 {
         const imgPrevElement = chapterPrevBtn.querySelector('img');
         const chapterNextBtn = document.querySelector('#chapterNext02')
         const imgNextElement = chapterNextBtn.querySelector('img');
-        imgNextElement.src = './img/common/ico-next.svg'; 
-        imgPrevElement.src = './img/common/ico-prev-disabled.svg'; 
+        imgNextElement.src = './img/common/ico-next.png'; 
+        imgPrevElement.src = './img/common/ico-prev-disabled.png'; 
 
         // 초기화
         MainEvent.chapter2Active4 = false;
@@ -270,6 +273,9 @@ export default class Chapter_2_1 {
 
         MainEvent.chapter2Array = [];
         MainEvent.chapter2HanglArray = [];
+
+        chapter2_confirm1.disabled = true;
+        chapter2_confirm2.disabled = true;
     }
 
     Clear() {
