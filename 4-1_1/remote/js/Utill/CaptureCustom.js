@@ -87,6 +87,8 @@ let Embed2TempDivElementStorage = []
 Embed2Input.Change = () => { 
     let embed2 = MainEvent.embed2
 
+    if (!embed2) return;
+
     Array.from(embed2.querySelectorAll("input")).forEach((e) => {
         const computedStyle = window.getComputedStyle(e);
 
@@ -131,6 +133,8 @@ let Embed2SvgParent = []
 
 Embed2Svg.Change = () => {
     let embed2 = MainEvent.embed2
+
+    if (!embed2) return;
 
     Array.from(embed2.querySelectorAll(".triangle")).forEach((e, index) => {
         let span = document.createElement("span")
@@ -219,6 +223,8 @@ let Embed2DotImg = {}
 
 Embed2DotImg.Change = () => {
     let embed2 = MainEvent.embed2
+
+    if (!embed2) return;
     let calc = embed2.querySelector(".vertical_calc")
 
     const children = Array.from(calc.children);
