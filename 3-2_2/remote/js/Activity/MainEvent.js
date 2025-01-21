@@ -28,6 +28,9 @@ export class MainEvent {
         this.chapter1Array = [];
         this.chapter1HanglArray = [];
 
+        // 챕터1에서 사용될 활성화 함수
+        this.ch1ActiveInput = null;
+
         // 챕터 2
         this.chapter2Active4 = false;
         this.chapter2Active3 = false;
@@ -36,6 +39,9 @@ export class MainEvent {
 
         this.chapter2Array = [];
         this.chapter2HanglArray = [];
+
+        // 문제 12번 관련 사용 Flag
+        this.stopComparing = false;
 
         if (!MainEvent.instance) {
             MainEvent.instance = this;
@@ -160,6 +166,13 @@ export class MainEvent {
             this.chapter1Active1 = state;
         }
         
+
+        // console.log("chapter1ACtive5: ", this.chapter1Active5)
+        // console.log("chapter1Active4: ", this.chapter1Active4)
+        // console.log("chapter1Active3: ", this.chapter1Active3)
+        // console.log("chapter1Active2: ", this.chapter1Active2)
+        // console.log("chapter1Active1: ", this.chapter1Active1)
+        this.ch1ActiveInput();
     }
 
 }

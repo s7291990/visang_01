@@ -21,6 +21,8 @@ export default class Chapter_1_1 {
         this.chapter1_confirm2_close = document.querySelector("#chapter1_confirm2_close")
 
         this.popup = document.querySelector("#popup")
+
+        MainEvent.ch1ActiveInput = this.chapter1ActiveInput.bind(this);
     }
 
     Init() {
@@ -44,7 +46,7 @@ export default class Chapter_1_1 {
         this.answerList = ["다섯자리 수", "만의 자리"]
         this.answerFontSizeList = [34, 34]
 
-        const unitConfig = {
+        this.unitConfig = {
             unit5: {
                 color: "#C483D0",
                 answers: ["60000", "육만"],
@@ -85,44 +87,17 @@ export default class Chapter_1_1 {
 
             this.ProblemList1.push(problemCtrl)
 
-            const chapter1ActiveInput = () => {
-                let chapter1 = MainEvent.chapter.chapter_1_1
-                let unit5 = MainEvent.chapter1Active5
-                let unit4 = MainEvent.chapter1Active4
-                let unit3 = MainEvent.chapter1Active3
-                let unit2 = MainEvent.chapter1Active2
-                let unit1 = MainEvent.chapter1Active1
-                chapter1.ProblemList2.forEach((problem, index) => {
-                    Object.entries(unitConfig).forEach(([unit, config]) => {
-                        if (eval(unit)) {  // unit5, unit4 등의 변수 평가
-                            if (config.indices.includes(index) && !problem.isComplete) {
-                                const isKorean = index >= 5;  // 5 이상의 인덱스는 한글 답안
-                                
-                                problem.activeBorderColor = config.color;
-                                if (isKorean) {
-                                    problem.keyBoardType = "korean";
-                                    problem.answerDiv.style.fontFamily = "Malgun";
-                                    problem.answerDiv.style.fontWeight = "bold";
-                                }
-                                problem.SetAnswerText(config.answers[isKorean ? 1 : 0]);
-                                problem.Activate();
-                            }
-                        }
-                    });
-                    
-                });
-            }
             let _embed1 = embed1.shadowRoot;
-            _embed1.querySelector("#key_1").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_2").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_3").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_4").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_5").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_6").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_7").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_8").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_9").addEventListener("click", chapter1ActiveInput);
-            _embed1.querySelector("#key_0").addEventListener("click", chapter1ActiveInput);
+            _embed1.querySelector("#key_1").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_2").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_3").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_4").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_5").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_6").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_7").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_8").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_9").addEventListener("click", this.chapter1ActiveInput);
+            _embed1.querySelector("#key_0").addEventListener("click", this.chapter1ActiveInput);
             
             //클릭 이벤트
             element.addEventListener("click", (e) => {
@@ -136,6 +111,35 @@ export default class Chapter_1_1 {
                 }
             })
         })   
+    }
+
+    chapter1ActiveInput = () => {
+        let chapter1 = MainEvent.chapter.chapter_1_1
+        let unit5 = MainEvent.chapter1Active5
+        let unit4 = MainEvent.chapter1Active4
+        let unit3 = MainEvent.chapter1Active3
+        let unit2 = MainEvent.chapter1Active2
+        let unit1 = MainEvent.chapter1Active1
+        console.log("여기까지 와?")
+        chapter1.ProblemList2.forEach((problem, index) => {
+            Object.entries(this.unitConfig).forEach(([unit, config]) => {
+                if (eval(unit)) {  // unit5, unit4 등의 변수 평가
+                    if (config.indices.includes(index) && !problem.isComplete) {
+                        const isKorean = index >= 5;  // 5 이상의 인덱스는 한글 답안
+                        
+                        problem.activeBorderColor = config.color;
+                        if (isKorean) {
+                            problem.keyBoardType = "korean";
+                            problem.answerDiv.style.fontFamily = "Malgun";
+                            problem.answerDiv.style.fontWeight = "bold";
+                        }
+                        problem.SetAnswerText(config.answers[isKorean ? 1 : 0]);
+                        problem.Activate();
+                    }
+                }
+            });
+            
+        });
     }
 
     SetProblem2() {
@@ -236,7 +240,7 @@ export default class Chapter_1_1 {
             
             // 입력박스 초기화
             let chapter1 = MainEvent.chapter.chapter_1_1
-            console.log(chapter1.ProblemList2);
+            // console.log(chapter1.ProblemList2);
             chapter1.ProblemList2.forEach((problem, index) => {
                 problem.DeActivate(true);
                 problem.element.style.boxShadow = ""
