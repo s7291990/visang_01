@@ -125,7 +125,11 @@ export default class Chapter_2_1 {
             let problemCtrl = new ProblemWriteController(element, this.problemEmmiter_2)
             problemCtrl.priorityStandardList = this.priorityStandardList_2
             problemCtrl.priorityNum = index
-
+            //2025.01.22 khy 수정 시작
+            if (index == 0) {
+                problemCtrl.keyBoardType = "korean";
+            }
+            //2025.01.22 khy 수정 끝
             problemCtrl.isUseAnswer = false
 
             problemCtrl.Init()

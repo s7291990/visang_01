@@ -126,7 +126,8 @@ export default class Problem_2 {
                                 problem.answerDiv.style.fontFamily = "Malgun"
                                 problem.answerDiv.style.fontWeight = "bold"
                                 problem.SetAnswerText(rightNumber)
-                                problem.Activate()
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
                                 break;
                         }
                     })
@@ -184,6 +185,9 @@ export default class Problem_2 {
 
             if (problem.isActive) {
                 problem.imgDiv.style.opacity = "1"
+
+                // kkm_추가_입력 불가능할 때는 연필 마크 제거
+                problem.imgDiv.style.opacity = "0";
                 problem.Activate()
             }
         })
@@ -215,7 +219,9 @@ export default class Problem_2 {
         this.ProblemList1.forEach((problem, index) => {
             problem.DeActivate(true);
             problem.element.style.boxShadow = ""
-            problem.imgDiv.style.opacity = 1
+            //problem.imgDiv.style.opacity = 1
+            // kkm_추가_입력 불가능할 때는 연필 마크 제거
+            problem.imgDiv.style.opacity = 0;
         })
     }
     NumberTokrean(num){

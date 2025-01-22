@@ -1,5 +1,6 @@
 import MainEvent from "../Activity/MainEvent.js";
 import { AnimationHelper } from "./AnimationHelper.js";
+import { EmbedCase } from "./EmbedCase.js";
 import { RemoveListener } from "./EventListenerHelper.js";
 import { KeyBoardOff, KeyBoardOn } from "./KeyBoard.js";
 
@@ -12,10 +13,10 @@ export class ProblemWriteController {
 
         this.answer = `000`
         this.answerMaxLength = String(this.answer).length
-        this.answerFontSize = 34
+        this.answerFontSize = 62
 
         this.imgPath = MainEvent.ImgPath + "/common/pencil_icon.png"
-        this.imgSize = {x: 34, y: 34}
+        this.imgSize = {x: 56, y: 56}
 
         /** 클릭 사용가능 여부 */
         this.isActive = false
@@ -55,8 +56,6 @@ export class ProblemWriteController {
         this.InputEvent = () => {}
         this.SuccessEvent = () => {}
         this.FailEvent = () => {}
-
-
     }
 
     Init() {
@@ -76,7 +75,7 @@ export class ProblemWriteController {
                 this.element.style.boxShadow = "";
 
                 if (this.answerDiv.textContent == "") {
-                    //this.imgDiv.style.opacity = 1
+                    this.imgDiv.style.opacity = 1
                 } else {
                     if (this.isUseAnswer) {
                         this.CheckAnswer()
@@ -175,111 +174,10 @@ export class ProblemWriteController {
                 this.answerDiv.style.lineHeight = this.answerDivLineHeight + "px"
             }
 
-            if(this.answerDiv.textContent === this.answer){
-                this.isUseAnswer = true;
-            }
-
-            // 확인 버튼 활성화
-            if (this.keyBoardType == "number") {
-                if (this.answerDiv.textContent.length == this.answerMaxLength) {
-                    console.log(this.isComplete);
-                    if (this.answerDiv.textContent !== "") {
-                        if(!this.isComplete){
-                            let init = new Date().getTime(); 
-                            const randomNumbers = Math.floor(Math.random()) + init;
-                            
-                            if(this.element.classList[1] === "c1_2"){
-                                MainEvent.chapter1Array.push(randomNumbers);
-                                console.log(MainEvent.chapter1Array);
-                                this.isComplete = true;
-                                if(MainEvent.chapter1Array.length === 5){
-                                    const chapter1_confirm1 = document.querySelector("#chapter1_confirm1");
-                                    chapter1_confirm1.disabled = false;
-                                }
-                            }
-        
-                            if(this.element.classList[1] === "c2_2"){
-                                MainEvent.chapter2Array.push(randomNumbers);
-                                this.isComplete = true;
-                                if(MainEvent.chapter2Array.length === 4){
-                                    const chapter2_confirm2 = document.querySelector("#chapter2_confirm2");
-                                    chapter2_confirm2.disabled = false;
-                                }
-                            }
-                        }
-                        
-                    }
-                }
-            }else if (this.keyBoardType == "korean"){
-                if (this.answerDiv.textContent.length == this.answerMaxLength) {
-                    console.log(this.isComplete);
-                    if (this.answerDiv.textContent !== "") {
-                        if(!this.isComplete){
-                            
-                            let init = new Date().getTime(); 
-                            const randomNumbers = Math.floor(Math.random()) + init;
-                            
-                            if(this.element.classList[1] === "c1_2"){
-                                MainEvent.chapter1HanglArray.push(randomNumbers);
-                                console.log(MainEvent.chapter1HanglArray);
-                                this.isComplete = true;
-                                if(MainEvent.chapter1HanglArray.length === 5){
-                                    const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
-                                    chapter1_confirm2.disabled = false;
-                                }
-                            }
-        
-                            if(this.element.classList[1] === "c2_2"){
-                                MainEvent.chapter2HanglArray.push(randomNumbers);
-                                this.isComplete = true;
-                                if(MainEvent.chapter2HanglArray.length === 1){
-                                    const chapter2_confirm1 = document.querySelector("#chapter2_confirm1");
-                                    chapter2_confirm1.disabled = false;
-                                }
-                            }
-                              
-                        }
-                        
-                    }
-                }
-            }
-            
-            
-            
-        
             if (this.isUseAnswer) {
                 //키보드 타입이 숫자일때
                 if (this.keyBoardType == "number") {
-                    //console.log(this.answerDiv.textContent.length, this.answerMaxLength);
-                    if (this.answerDiv.textContent.length == this.answerMaxLength) {
-                        this.CheckAnswer()
-                        
-                        // 확인 버튼 활성화
-                        /*
-                        let init = new Date().getTime(); 
-                        const randomNumbers = Math.floor(Math.random()) + init;
-                        if(this.element.classList[1] === "c1_2"){
-                            MainEvent.chapter1Array.push(randomNumbers);
-                        }
-                        console.log(MainEvent.chapter1Array);
-                        if(MainEvent.chapter1Array.length === 5){
-                            const chapter1_confirm1 = document.querySelector("#chapter1_confirm1");
-                            chapter1_confirm1.disabled  = false;
-                        }
-
-                        if(this.element.classList[1] === "c2_2"){
-                            MainEvent.chapter2Array.push(randomNumbers);
-                            //console.log(MainEvent.chapter2Array);
-                        }
-                    
-                        if(MainEvent.chapter2Array.length === 4){
-                            const chapter2_confirm2 = document.querySelector("#chapter2_confirm2");
-                            chapter2_confirm2.disabled  = false;
-                        }
-                             */
-
-                    }
-                        
+                    if (this.answerDiv.textContent.length == this.answerMaxLength) this.CheckAnswer()
                 }
                 //키보드 타입이 한글일때
                 else if (this.keyBoardType == "korean") {
@@ -292,8 +190,6 @@ export class ProblemWriteController {
                         //정답이랑 일치할때
                         if (this.answerDiv.textContent == this.answer) {
                             this.CheckAnswer()
-
-                            
                         }
     
                         //글자수 마지막에서 글자가 완성되었을 때
@@ -307,24 +203,14 @@ export class ProblemWriteController {
                         this.CheckAnswer()
                     }
                 }    
-            }else{
-                //키보드 타입이 숫자일때
-                if (this.keyBoardType == "number") {
-                    if (this.answerDiv.textContent.length == this.answerMaxLength) {
-                        //this.answerDiv.textContent = "";
-                    }
-                        
-                }
             }
 
-            this.InputEvent(this);
-            
-
+            this.InputEvent(this)
         });
         //---------------- 트리거 이벤트 ---------------
         this.eventEmitter.on("click-problem", (data) => {
             if (this.answerDiv.textContent === "" && this.isActive == true) {
-                //this.imgDiv.style.opacity = "1"
+                this.imgDiv.style.opacity = "1"
             }
 
             this.element.style.boxShadow = "";
@@ -394,26 +280,28 @@ export class ProblemWriteController {
     CheckAnswer() {
         this.answerDiv.blur()
 
+        // if (EmbedCase.chapter_1()) {
+        //     console.log("이거 되는거임?");
+        // }
 
         if (this.keyBoardType == "korean") this.inputHangulCnt = 0
         
+        //  정답일 때
         if (this.answerDiv.textContent == this.answer) {
             if ((this.isMobile || this.isIpad) && this.keyBoardType == "number") KeyBoardOff();
             this.isComplete = true
-            this.answerDiv.style.color = "#B73751";
             this.element.style.boxShadow = ""
+            this.answerDiv.style.color = "#B73751";
             this.TriggerEvent("write-problem")
             
             this.SuccessEvent(this)
-
-            
             
         } else {
             this.isActive = false
             this.animation = AnimationHelper.Wrong(this.answerDiv, () => {
                 if ((this.isMobile || this.isIpad) && this.keyBoardType == "number") KeyBoardOff();
-                //this.answerDiv.textContent = ""
-                //this.imgDiv.style.opacity = 1
+                this.answerDiv.textContent = ""
+                this.imgDiv.style.opacity = 1
                 this.element.style.boxShadow = ""
                 this.isActive = true
                 this.FailEvent(this)
@@ -456,9 +344,7 @@ export class ProblemWriteController {
 
                     if (this.isUseAnswer) {
                         //입력 글자 같으면 정답 비교
-                        if (this.answerDiv.textContent.length == this.answerMaxLength && this.answer) {
-                            this.CheckAnswer()
-                        }
+                        if (this.answerDiv.textContent.length == this.answerMaxLength && this.answer) this.CheckAnswer()
                     }
                     
                 }
@@ -480,10 +366,10 @@ export class ProblemWriteController {
         //정답 텍스트 추가
         if (this.answerDiv) this.answerDiv.remove()
         this.answerDiv = document.createElement("div")
-        this.answerDiv.style.color = "#000000";
         this.answerDiv.style.fontSize = this.answerFontSize + "px"
         this.answerDiv.innerHTML = ``
         this.answerDiv.style.fontFamily = this.defaultFontFamily
+        this.answerDiv.style.color = "#000000";
         this.answerDiv.setAttribute("tabindex", "-1")
 
         this.answerDiv.style.height = this.answerDivHeight + "px"

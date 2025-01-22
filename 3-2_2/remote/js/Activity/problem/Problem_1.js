@@ -121,23 +121,33 @@ export default class Problem_1 {
                         switch(index) {
                             case 0:
                                 problem.SetAnswerText(this.value1*10000)
-                                problem.Activate()
+
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
                                 break;
                             case 1:
                                 problem.SetAnswerText(this.value2*1000)
-                                problem.Activate()
+                                
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
                                 break;
                             case 2:
                                 problem.SetAnswerText(this.value3*100)
-                                problem.Activate()
+
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
                                 break;
                             case 3:
                                 problem.SetAnswerText(this.value4*10)
-                                problem.Activate()
+
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
                                 break;
                             case 4:
                                 problem.SetAnswerText(this.value5)
-                                problem.Activate()
+
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
                                 break;
                         }
                     })
@@ -194,7 +204,10 @@ export default class Problem_1 {
             problem.priorityStandardIdx = 0
 
             if (problem.isActive) {
-                problem.imgDiv.style.opacity = "1"
+
+                // kkm_추가_입력 불가능할 때는 연필 마크 제거
+                problem.imgDiv.style.opacity = "0";
+
                 problem.Activate()
             }
         })
@@ -226,7 +239,9 @@ export default class Problem_1 {
         this.ProblemList1.forEach((problem, index) => {
             problem.DeActivate(true);
             problem.element.style.boxShadow = ""
-            problem.imgDiv.style.opacity = 1
+
+            // kkm_추가_입력 불가능할 때는 연필 마크 제거
+            problem.imgDiv.style.opacity = 0;
         })
     }
 

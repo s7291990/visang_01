@@ -134,7 +134,9 @@ export default class Chapter_1_1 {
                             problem.answerDiv.style.fontWeight = "bold";
                         }
                         problem.SetAnswerText(config.answers[isKorean ? 1 : 0]);
-                        problem.Activate();
+
+                        // kkm 추가_처음일때만 적용
+                        if(!problem.isActive) problem.Activate();
                     }
                 }
             });
@@ -154,6 +156,12 @@ export default class Chapter_1_1 {
             let problemCtrl = new ProblemWriteController(element, this.problemEmmiter_2)
             problemCtrl.priorityStandardList = this.priorityStandardList_2
             problemCtrl.priorityNum = index
+
+            // kkm 추가_fontSize 적용
+            problemCtrl.answerFontSize = 34;
+
+            // kkm 추가_연필 사이즈 지정_x: width, y: height
+            problemCtrl.imgSize = {x: 34, y: 34};
 
             problemCtrl.isUseAnswer = false
 

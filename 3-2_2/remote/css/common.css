@@ -423,6 +423,7 @@ button {
 .problem1_1 .write-answer-div{
     font-size:42px !important
 }
+
 .problem2_1 .write-answer-div{
     font-size:42px !important
 }
@@ -433,4 +434,34 @@ button {
     justify-content: flex-end;
     padding: 0 25px;
     font-size:48px !important
+}
+
+.problem1_1 .write-img-div{
+    width:34px !important;
+    height:34px !important;
+}
+.problem2_1 .write-img-div{
+    width:34px !important;
+    height:34px !important;
+}
+.problem3_1 .write-img-div{
+    width:34px !important;
+    height:34px !important;
+}
+.problem4_1 .write-img-div{
+    width:34px !important;
+    height:34px !important;
+}
+
+.c2_2 .write-answer-div{
+    font-size:42px !important
+}
+.c2_2 .write-img-div{
+    width:34px !important;
+    height:34px !important;
+}
+#chapter1View04 .c2_2 .write-answer-div{
+    justify-content: flex-end;
+    padding: 0 25px;
+    font-size:42px !important
 }
