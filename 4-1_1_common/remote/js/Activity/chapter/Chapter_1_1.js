@@ -157,7 +157,9 @@ export default class Chapter_1_1 {
             problemCtrl.priorityStandardList = this.priorityStandardList_2
             problemCtrl.priorityNum = index
             //2025.01.22 khy 수정 시작
-            if (index == 0) {
+
+            console.log("index=="+index);
+            if (index >= 5) {
                 problemCtrl.keyBoardType = "korean";
             }
             //2025.01.22 khy 수정 끝

@@ -3,6 +3,7 @@ import EventEmitter from "../../Utill/EventEmitter.js";
 import { RemoveListener } from "../../Utill/EventListenerHelper.js";
 import { ProblemWriteController } from "../../Utill/ProblemWriteController.js"
 import { GetRandomValue } from "../../Utill/RandomUtill.js";
+import { EmbedCase } from "../../Utill/EmbedCase.js";
 import MainEvent from "../MainEvent.js";
 
 export default class Problem_1 {
@@ -98,50 +99,54 @@ export default class Problem_1 {
         })
 
         const isEmbeddedComplete = () => {
-            const numElements = _embed1.querySelectorAll('#string_number_1 .num');
-            const allHaveText = Array.from(numElements).every(element => 
-                element.textContent.trim() !== ''
-            );
-            
-            if(allHaveText){
-                this.ProblemList1.forEach((problem, index) => {
-                    switch(index) {
-                        case 0:
-                            problem.SetAnswerText(this.value1*10000)
+            if (EmbedCase.problem_1()) {
+                const numElements = _embed1.querySelectorAll('#string_number_1 .num');
+                const allHaveText = Array.from(numElements).every(element => 
+                    element.textContent.trim() !== ''
+                );
+                
+                if(allHaveText && this.ProblemList1){
+                    this.ProblemList1.forEach((problem, index) => {
+                        switch(index) {
+                            case 0:
+                                problem.SetAnswerText(this.value1*10000)
 
-                            // kkm_추가_처음일때만 Active
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 1:
-                            problem.SetAnswerText(this.value2*1000)
-                            
-                            // kkm_추가
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 2:
-                            problem.SetAnswerText(this.value3*100)
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 1:
+                                problem.SetAnswerText(this.value2*1000)
+                                
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 2:
+                                problem.SetAnswerText(this.value3*100)
 
-                            // kkm_추가
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 3:
-                            problem.SetAnswerText(this.value4*10)
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 3:
+                                problem.SetAnswerText(this.value4*10)
 
-                            // kkm_추가
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 4:
-                            problem.SetAnswerText(this.value5)
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 4:
+                                problem.SetAnswerText(this.value5)
 
-                            // kkm_추가
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                    }
-                })
+                                // kkm_추가
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                        }
+                    })
+                }
+                this.isEmbeddedComplete = allHaveText;
+                console.log(this.isEmbeddedComplete);
+                return allHaveText;
             }
-            this.isEmbeddedComplete = allHaveText;
-            console.log(this.isEmbeddedComplete);
-            return allHaveText;
+            return false;
+            
         }
 
         const rightNumbers = () => {

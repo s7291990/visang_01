@@ -3,6 +3,7 @@ import EventEmitter from "../../Utill/EventEmitter.js"
 import { RemoveListener } from "../../Utill/EventListenerHelper.js"
 import { ProblemWriteController } from "../../Utill/ProblemWriteController.js"
 import { GetRandomValue } from "../../Utill/RandomUtill.js"
+import { EmbedCase } from "../../Utill/EmbedCase.js";
 import MainEvent from "../MainEvent.js"
 
 export default class Problem_3 {
@@ -84,42 +85,44 @@ export default class Problem_3 {
         })
 
         const isEmbeddedComplete03 = () => {
-          
-            const numElements = _embed2.querySelectorAll('.answer_number .num');
-            const allHaveText = Array.from(numElements[3]).every(element => 
-                element.textContent.trim() !== ''
-            );
-            
-            if(allHaveText){
-                // 인풋 활성화
-                this.ProblemList1.forEach((problem, index) => {
-                    switch(index) {
-                        case 0:
-                            problem.SetAnswerText(this.value1*10000000)
-                            // kkm_추가_처음일때만 Active
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 1:
-                            problem.SetAnswerText(this.value2*1000000)
-                            // kkm_추가_처음일때만 Active
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 2:
-                            problem.SetAnswerText(this.value3*100000)
-                            // kkm_추가_처음일때만 Active
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                        case 3:
-                            problem.SetAnswerText(this.value4*10000)
-                            // kkm_추가_처음일때만 Active
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                    }
-                })
+            if (EmbedCase.problem_3()) {
+                const numElements = _embed2.querySelectorAll('.answer_number .num');
+                const allHaveText = Array.from(numElements[3]).every(element => 
+                    element.textContent.trim() !== ''
+                );
+                
+                if(allHaveText && this.ProblemList1){
+                    // 인풋 활성화
+                    this.ProblemList1.forEach((problem, index) => {
+                        switch(index) {
+                            case 0:
+                                problem.SetAnswerText(this.value1*10000000)
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 1:
+                                problem.SetAnswerText(this.value2*1000000)
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 2:
+                                problem.SetAnswerText(this.value3*100000)
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                            case 3:
+                                problem.SetAnswerText(this.value4*10000)
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                        }
+                    })
+                }
+                this.isEmbeddedComplete = allHaveText;
+                console.log(this.isEmbeddedComplete);
+                return allHaveText;
             }
-            this.isEmbeddedComplete = allHaveText;
-            console.log(this.isEmbeddedComplete);
-            return allHaveText;
+            return false;
         }
 
         const rightNumbers = () => {

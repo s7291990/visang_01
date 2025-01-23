@@ -3,6 +3,7 @@ import EventEmitter from "../../Utill/EventEmitter.js";
 import { RemoveListener } from "../../Utill/EventListenerHelper.js";
 import { ProblemWriteController } from "../../Utill/ProblemWriteController.js"
 import { GetRandomValue } from "../../Utill/RandomUtill.js";
+import { EmbedCase } from "../../Utill/EmbedCase.js";
 import MainEvent from "../MainEvent.js";
 
 export default class Problem_2 {
@@ -17,7 +18,7 @@ export default class Problem_2 {
 
         this.problem2_reset = document.querySelector("#problem2_reset")
 
-        this.isEmbeddedComplete = false;
+        this.isEmbeddedComplete02 = false;
     }
 
     Init() {
@@ -103,33 +104,36 @@ export default class Problem_2 {
             this.Clear()
         })
 
-        const isEmbeddedComplete = () => {
-            const numElements = _embed1.querySelectorAll('#string_number_1 .num');
-            const allHaveText = Array.from(numElements).every(element => 
-                element.textContent.trim() !== ''
-            );
-            
-            if(allHaveText){
-                // 오른쪽 숫자 구하기
-                const rightNum = Array.from({ length: 5 }, (_, i) => 
-                    document.querySelector(`#problem2 #p2_value${1 + i}`).textContent
-                ).join('');
-                this.ProblemList1.forEach((problem, index) => {
-                    switch(index) {
-                        case 0:
-                            problem.keyBoardType = "korean"
-                            problem.answerDiv.style.fontFamily = "Malgun"
-                            problem.answerDiv.style.fontWeight = "bold"
-                            problem.SetAnswerText(this.NumberTokrean(parseInt(rightNum)))
-                            // kkm_추가_처음일때만 Active
-                            if(!problem.isActive) problem.Activate()
-                            break;
-                    }
-                })
+        const isEmbeddedComplete02 = () => {
+            if (EmbedCase.problem_2()) {
+                const numElements = _embed1.querySelectorAll('#string_number_1 .num');
+                const allHaveText = Array.from(numElements).every(element => 
+                    element.textContent.trim() !== ''
+                );
+                
+                if(allHaveText && this.ProblemList1){
+                    // 오른쪽 숫자 구하기
+                    const rightNum = Array.from({ length: 5 }, (_, i) => 
+                        document.querySelector(`#problem2 #p2_value${1 + i}`).textContent
+                    ).join('');
+                    this.ProblemList1.forEach((problem, index) => {
+                        switch(index) {
+                            case 0:
+                                problem.keyBoardType = "korean"
+                                problem.answerDiv.style.fontFamily = "Malgun"
+                                problem.answerDiv.style.fontWeight = "bold"
+                                problem.SetAnswerText(this.NumberTokrean(parseInt(rightNum)))
+                                // kkm_추가_처음일때만 Active
+                                if(!problem.isActive) problem.Activate()
+                                break;
+                        }
+                    })
+                }
+                this.isEmbeddedComplete02 = allHaveText;
+                console.log(this.isEmbeddedComplete02);
+                return allHaveText;
             }
-            this.isEmbeddedComplete = allHaveText;
-            console.log(this.isEmbeddedComplete);
-            return allHaveText;
+            return false;
         }
 
         const rightNumbers = () => {
@@ -185,11 +189,11 @@ export default class Problem_2 {
         _embed1.querySelector("#key_0").addEventListener("click", rightNumbers);
         //answer_number_1
 
-        _embed1.querySelector("#string_number_1").addEventListener("click", isEmbeddedComplete);
+        _embed1.querySelector("#string_number_1").addEventListener("click", isEmbeddedComplete02);
     }
 
     Reset() {
-        this.isEmbeddedComplete = false;
+        this.isEmbeddedComplete02 = false;
         this.ProblemList1.forEach((problem, index) => {
             problem.answerDiv.textContent = ""
 
@@ -215,7 +219,7 @@ export default class Problem_2 {
     }
 
     Clear() {
-        this.isEmbeddedComplete = false;
+        this.isEmbeddedComplete02 = false;
         //MainEvent.embed1.querySelector('.number_reset').click()
         //let sec1 = MainEvent.embed1.querySelector("#total_number_5")
         //console.log(sec1);

@@ -3,6 +3,7 @@ import EventEmitter from "../../Utill/EventEmitter.js"
 import { RemoveListener } from "../../Utill/EventListenerHelper.js"
 import { ProblemWriteController } from "../../Utill/ProblemWriteController.js"
 import { GetRandomValue } from "../../Utill/RandomUtill.js"
+import { EmbedCase } from "../../Utill/EmbedCase.js";
 import MainEvent from "../MainEvent.js"
 
 export default class Problem_4 {
@@ -89,36 +90,39 @@ export default class Problem_4 {
         })
 
         const isEmbeddedComplete04 = () => {
-            const numElements = _embed2.querySelectorAll('.answer_number .num');
-            const allHaveText = Array.from(numElements[3]).every(element => 
-                element.textContent.trim() !== ''
-            );
-            
-            if(allHaveText){
-                // 오른쪽 숫자 구하기
-                const rightNum = Array.from({ length: 4 }, (_, i) => 
-                    document.querySelector(`#problem4 #p4_value${1 + i}`).textContent
-                ).join('');
-                console.log(rightNum);
-                let rightNumber = this.NumberTokrean(rightNum);
-                    console.log(rightNumber);
-                    // 인풋 활성화
-                    this.ProblemList1.forEach((problem, index) => {
-                        switch(index) {
-                            case 0:
-                                problem.keyBoardType = "korean"
-                                problem.answerDiv.style.fontFamily = "Malgun"
-                                problem.answerDiv.style.fontWeight = "bold"
-                                problem.SetAnswerText(rightNumber)
-                                // kkm_추가_처음일때만 Active
-                                if(!problem.isActive) problem.Activate()
-                                break;
-                        }
-                    })
+            if (EmbedCase.problem_4()) {
+                const numElements = _embed2.querySelectorAll('.answer_number .num');
+                const allHaveText = Array.from(numElements[3]).every(element => 
+                    element.textContent.trim() !== ''
+                );
+                
+                if(allHaveText && this.ProblemList1){
+                    // 오른쪽 숫자 구하기
+                    const rightNum = Array.from({ length: 4 }, (_, i) => 
+                        document.querySelector(`#problem4 #p4_value${1 + i}`).textContent
+                    ).join('');
+                    console.log(rightNum);
+                    let rightNumber = this.NumberTokrean(rightNum);
+                        console.log(rightNumber);
+                        // 인풋 활성화
+                        this.ProblemList1.forEach((problem, index) => {
+                            switch(index) {
+                                case 0:
+                                    problem.keyBoardType = "korean"
+                                    problem.answerDiv.style.fontFamily = "Malgun"
+                                    problem.answerDiv.style.fontWeight = "bold"
+                                    problem.SetAnswerText(rightNumber)
+                                    // kkm_추가_처음일때만 Active
+                                    if(!problem.isActive) problem.Activate()
+                                    break;
+                            }
+                        })
+                }
+                this.isEmbeddedComplete = allHaveText;
+                console.log(this.isEmbeddedComplete);
+                return allHaveText;
             }
-            this.isEmbeddedComplete = allHaveText;
-            console.log(this.isEmbeddedComplete);
-            return allHaveText;
+            return false;
         }
 
         const rightNumbers = () => {
