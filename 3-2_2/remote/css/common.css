@@ -452,7 +452,9 @@ button {
     width:34px !important;
     height:34px !important;
 }
-
+.c1_2 .write-answer-div{
+    color: #000 !important
+}
 .c2_2 .write-answer-div{
     font-size:42px !important
 }
