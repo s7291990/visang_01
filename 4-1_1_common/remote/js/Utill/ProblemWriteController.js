@@ -1,6 +1,5 @@
 import MainEvent from "../Activity/MainEvent.js";
 import { AnimationHelper } from "./AnimationHelper.js";
-import { EmbedCase } from "./EmbedCase.js";
 import { RemoveListener } from "./EventListenerHelper.js";
 import { KeyBoardOff, KeyBoardOn } from "./KeyBoard.js";
 
@@ -56,6 +55,7 @@ export class ProblemWriteController {
         this.InputEvent = () => {}
         this.SuccessEvent = () => {}
         this.FailEvent = () => {}
+        this.CustomKeyPadEvent = () => {}
     }
 
     Init() {
@@ -103,14 +103,28 @@ export class ProblemWriteController {
 
             let agent = navigator.userAgent;
             //모바일 체크
-            this.isMobile = /iphone|ipod|android|blackberry|windows phone|opera mini|iemobile|mobile/i.test(agent);
+            this.isMobile = /iphone|ipod|android|blackberry|windows phone|opera mini|iemobile|mobile|samsungbrowser/i.test(agent);
             
             // iPad IOS 13버전 이후로는 웹 형식으로 나와서 별도 비교 로직 추가
             this.isIpad = /iPad|Macintosh/.test(agent) && 'ontouchend' in document;
             
-            if ((this.isMobile || this.isIpad) && this.keyBoardType == "number") {
-                this.SetCustomKeyBoard(this.element);
-                KeyBoardOn();
+            //모바일 경우
+            if (this.isMobile || this.isIpad) {
+                //숫자일때
+                if (this.keyBoardType == "number") {
+                    this.SetCustomKeyBoard(this.element);
+                    KeyBoardOn();
+                } 
+                //한글이나 다른 언어일때
+                else {
+                    //모바일 키보드 호출
+                    let customInput = document.createElement("input");
+                    document.body.appendChild(customInput);
+                    customInput.focus();
+                    customInput.remove();
+                    this.answerDiv.focus()
+                }
+                
             }
 
             this.TriggerEvent("click-problem")
@@ -132,41 +146,50 @@ export class ProblemWriteController {
 
         //키보드 누를때
         this.answerDiv.addEventListener('keydown', (event) => { 
+            
             if (!this.isActive || this.isComplete) {
                 event.preventDefault();
                 return;
             }
+
         });
 
+                
         //키보드 입력될 때
         this.answerDiv.addEventListener('input', (event) => {
+            //최대값까지만 입력 가능
             if (this.answerDiv.textContent.length >= this.answerMaxLength) {
-                const selection = window.getSelection();
-                const range = document.createRange();
-
                 this.answerDiv.textContent = this.answerDiv.textContent.substring(0, this.answerMaxLength);
-
-                range.selectNodeContents(this.answerDiv);
-                range.collapse(false);
-                selection.removeAllRanges();
-                selection.addRange(range);
-
             }
 
 
             const currentValue = this.answerDiv.textContent;
             this.imgDiv.style.opacity = 0
 
-            let filteredValue;
+            
+            let filteredValue = currentValue;
+            
             if (this.keyBoardType == "number") {
                 // 정규식 숫자랑 .만
                 filteredValue = currentValue.replace(/[^0-9.]/g, '');
             } else if (this.keyBoardType == "korean") {
-                // 한글
-                filteredValue = currentValue.replace(/[^\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF\s]/g, '')
+                // 한글 및 영어
+                filteredValue = currentValue.replace(/[^\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AFa-zA-Z0-9\s]/g, '');
             }
 
             this.answerDiv.textContent = filteredValue;
+
+            //======= 입력 커서를 옮기는 작업 (IOS 대응) ===========
+            const range = document.createRange();
+            const selection = window.getSelection();
+
+            range.selectNodeContents(this.answerDiv);
+            // 커서 마지막으로 이동 (false는 맨 뒤, true는 맨 앞)
+            range.collapse(false);
+
+            selection.removeAllRanges();
+            selection.addRange(range);
+            //====================================================
 
             if (this.answerDiv.textContent.length == "") {
                 this.answerDiv.style.lineHeight = this.answerDivHeight + "px"
@@ -186,6 +209,9 @@ export class ProblemWriteController {
                     }
                     if (this.answerDiv.textContent.length == this.answerMaxLength) {
                         this.inputHangulCnt++
+                        console.log("정답 길이에 도달했을 때")
+                        console.log("입력된 길이: ", this.answerDiv.textContent.length)
+                        console.log("inputHangul: ", this.inputHangulCnt);
     
                         //정답이랑 일치할때
                         if (this.answerDiv.textContent == this.answer) {
@@ -280,21 +306,16 @@ export class ProblemWriteController {
     CheckAnswer() {
         this.answerDiv.blur()
 
-        // if (EmbedCase.chapter_1()) {
-        //     console.log("이거 되는거임?");
-        // }
-
         if (this.keyBoardType == "korean") this.inputHangulCnt = 0
         
-        //  정답일 때
         if (this.answerDiv.textContent == this.answer) {
             if ((this.isMobile || this.isIpad) && this.keyBoardType == "number") KeyBoardOff();
             this.isComplete = true
             this.element.style.boxShadow = ""
-            this.answerDiv.style.color = "#B73751";
             this.TriggerEvent("write-problem")
             
             this.SuccessEvent(this)
+            
             
         } else {
             this.isActive = false
@@ -348,6 +369,8 @@ export class ProblemWriteController {
                     }
                     
                 }
+
+                this.CustomKeyPadEvent(this);
             })
         })
     }
@@ -369,7 +392,7 @@ export class ProblemWriteController {
         this.answerDiv.style.fontSize = this.answerFontSize + "px"
         this.answerDiv.innerHTML = ``
         this.answerDiv.style.fontFamily = this.defaultFontFamily
-        this.answerDiv.style.color = "#000000";
+
         this.answerDiv.setAttribute("tabindex", "-1")
 
         this.answerDiv.style.height = this.answerDivHeight + "px"

@@ -1,0 +1,44 @@
+#con_container {
+    display: flex;
+}
+
+#con_lay1 {
+    width: 536px;
+    height: 100%;
+    margin-left: 130px;
+}
+
+#con_lay1_1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.concatenate_input_wrap {
+    width: 536px;
+    height: 221px;
+}
+
+.concatenate_input_wrap input {
+    width: 180px;
+    height: 100px;
+}
+
+.concatenate_div_wrap {
+    width: 536px;
+    height: 596px;
+}
+
+.concatenate_div_wrap_child {
+    width: 508px;
+    height: 564.57px;
+}
+
+#con_lay2 {
+    width: 960px;
+    height: 100%;
+}
+
+#con_lay3 {
+    width: 200px;
+    height: 100%;
+}

@@ -113,8 +113,6 @@ export class ProblemClickController {
 
         //정답 텍스트 추가
         this.answerDiv = document.createElement("div")
-
-        //폰트 변경 & 스타일 커스텀시 this.answer값 태그로 전달 => <span class="Batang" style="font-size:40px">곱해지는 수</span>
         this.answerDiv.style.fontSize = this.answerFontSize + "px"
         this.answerDiv.style.fontFamily = "Malgunbd"
         this.answerDiv.style.marginBottom = this.marginBottomVal + "px"

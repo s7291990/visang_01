@@ -130,8 +130,7 @@ export default class Chapter_1_1 {
                         problem.activeBorderColor = config.color;
                         if (isKorean) {
                             problem.keyBoardType = "korean";
-                            problem.answerDiv.style.fontFamily = "Malgun";
-                            problem.answerDiv.style.fontWeight = "bold";
+                            problem.defaultFontFamily = "Malgunbd"
                         }
                         problem.SetAnswerText(config.answers[isKorean ? 1 : 0]);
 
@@ -161,6 +160,7 @@ export default class Chapter_1_1 {
             console.log("index=="+index);
             if (index >= 5) {
                 problemCtrl.keyBoardType = "korean";
+                problemCtrl.defaultFontFamily = "Malgunbd"
             }
             //2025.01.22 khy 수정 끝
             // kkm 추가_fontSize 적용
@@ -173,179 +173,39 @@ export default class Chapter_1_1 {
 
             problemCtrl.Init()
 
-            element.children[1].addEventListener("click", (e) => {
-                e.preventDefault()
-
-                console.log(element, index)
-                // if (index == 0) {
-                //     let calResult = MainEvent.embed1.querySelector('.btn_off3');
-
-                //     if (calResult.classList.contains('number') == false) {
-                //         calResult.click()
-                //         element.click()
-                //     }
-
-                // }
-            })
-
             this.ProblemList2.push(problemCtrl)
 
-            //키보드 입력될 때
+            // element.children[1].addEventListener("click", (e) => {
+            //     e.preventDefault()
+
+            //     console.log(element, index)
+            //     // if (index == 0) {
+            //     //     let calResult = MainEvent.embed1.querySelector('.btn_off3');
+
+            //     //     if (calResult.classList.contains('number') == false) {
+            //     //         calResult.click()
+            //     //         element.click()
+            //     //     }
+
+            //     // }
+            // }) 
+
+        
+            // problemCtrl.InputEvent = (data) => {
+            //     this.BtnActive(problemCtrl);
+            // }
+            document.body.addEventListener("click", (e) => {
+                this.BtnActive(problemCtrl);
+            })
+
+            // input 이벤트 수정
             problemCtrl.answerDiv.addEventListener('input', (event) => {
-                if (problemCtrl.answerDiv.textContent.length >= problemCtrl.answerMaxLength) {
-                    const selection = window.getSelection();
-                    const range = document.createRange();
-
-                    problemCtrl.answerDiv.textContent = problemCtrl.answerDiv.textContent.substring(0, problemCtrl.answerMaxLength);
-
-                    range.selectNodeContents(problemCtrl.answerDiv);
-                    range.collapse(false);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                }
-
-                const currentValue = problemCtrl.answerDiv.textContent;
-                //problemCtrl.imgDiv.style.opacity = 0
-
-                let filteredValue;
-                if (problemCtrl.keyBoardType == "number") {
-                    filteredValue = currentValue.replace(/[^0-9.]/g, '');
-                } else if (problemCtrl.keyBoardType == "korean") {
-                    filteredValue = currentValue.replace(/[^\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF\s]/g, '')
-                }
-
-                problemCtrl.answerDiv.textContent = filteredValue;
-
-                if (problemCtrl.answerDiv.textContent.length == "") {
-                    problemCtrl.answerDiv.style.lineHeight = problemCtrl.answerDivHeight + "px"
-                } else {
-                    problemCtrl.answerDiv.style.lineHeight = problemCtrl.answerDivLineHeight + "px"
-                }
-
-                if(problemCtrl.answerDiv.textContent === problemCtrl.answer){
-                    //problemCtrl.isUseAnswer = true;
-                }
-            
-                //키보드 타입이 숫자일때
-                if (problemCtrl.keyBoardType == "number") {
-                    console.log(problemCtrl.answerDiv.textContent.length, problemCtrl.answerMaxLength);
-                    if (problemCtrl.answerDiv.textContent.length == problemCtrl.answerMaxLength) {
-                        //problemCtrl.CheckAnswer()
-                        
-                        // 확인 버튼 활성화
-                        //this.chapter1Array
-                        let init = new Date().getTime(); 
-                        const randomNumbers = Math.floor(Math.random()) + init;
-                        if(problemCtrl.element.classList[1] === "c1_2" && problemCtrl.answerDiv.textContent.trim() !== ""){
-                            // 현재 입력박스의 인덱스 찾기
-                            const currentIndex = this.ProblemList2.indexOf(problemCtrl);
-                            
-                            // 이미 해당 인덱스의 값이 배열에 있다면 해당 인덱스의 값을 교체
-                            const existingIndex = MainEvent.chapter1Array.findIndex((_, idx) => 
-                                idx === currentIndex
-                            );
-                            
-                            if (existingIndex !== -1) {
-                                MainEvent.chapter1Array[existingIndex] = randomNumbers;
-                            } else {
-                                MainEvent.chapter1Array.push(randomNumbers);
-                            }
-                            console.log(randomNumbers);
-                        }
-                        if(MainEvent.chapter1Array.length === 5){
-                            const chapter1_confirm1 = document.querySelector("#chapter1_confirm1");
-                            chapter1_confirm1.disabled = false;
-                        }
- 
-
-                    }
-                        
-                }
-                //키보드 타입이 한글일때
-                else if (problemCtrl.keyBoardType == "korean") {
-                    if (problemCtrl.answerDiv.textContent.length > problemCtrl.answerMaxLength) {
-                        return
-                    }
-                    if (problemCtrl.answerDiv.textContent.length === problemCtrl.answerMaxLength) {
-                        problemCtrl.inputHangulCnt++
-                        
-
-                        // 확인 버튼 활성화
-                        let init = new Date().getTime(); 
-                        const randomNumbers = Math.floor(Math.random()) + init;
-                        
-                        if(problemCtrl.element.classList[1] === "c1_2" && problemCtrl.answerDiv.textContent.trim() !== ""){
-                            // 현재 입력박스의 인덱스 찾기
-                            const currentIndex = this.ProblemList2.indexOf(problemCtrl);
-                            
-                            // 해당 인덱스의 값이 있다면 삭제
-                            if (MainEvent.chapter1HanglArray[currentIndex] !== undefined) {
-                                delete MainEvent.chapter1HanglArray[currentIndex];
-                            }
-                            
-                            // 새로운 값 추가
-                            MainEvent.chapter1HanglArray[currentIndex] = randomNumbers;
-                            
-                            // undefined를 제거하고 실제 값만 계산하기 위해 필터링
-                            const validEntriesCount = Object.values(MainEvent.chapter1HanglArray).filter(x => x !== undefined).length;
-                            
-                            if(validEntriesCount === 5){
-                                const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
-                                chapter1_confirm2.disabled = false;
-                            } else {
-                                const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
-                                chapter1_confirm2.disabled = true;
-                            }
-                        } else if(problemCtrl.element.classList[1] === "c1_2") {
-                            // 입력값이 비어있을 경우 해당 인덱스의 값 삭제
-                            const currentIndex = this.ProblemList2.indexOf(problemCtrl);
-                            if (MainEvent.chapter1HanglArray[currentIndex] !== undefined) {
-                                delete MainEvent.chapter1HanglArray[currentIndex];
-                            }
-                        }
-                        
-                        console.log(MainEvent.chapter1HanglArray);
-                         
- 
-                        if(MainEvent.chapter2HanglArray.length === 1){
-                            const chapter2_confirm1 = document.querySelector("#chapter2_confirm1");
-                            chapter2_confirm1.disabled  = false;
-                        }
-    
-                        //정답이랑 일치할때
-                        if (problemCtrl.answerDiv.textContent == problemCtrl.answer) {
-                            //problemCtrl.CheckAnswer()
-                        }
-    
-                        //글자수 마지막에서 글자가 완성되었을 때
-                        if (problemCtrl.inputHangulCnt == 3 && problemCtrl.answerDiv.textContent != problemCtrl.answer) {
-                            //problemCtrl.CheckAnswer()
-                        }
-
-                        
-                    } 
-                    //글자수 보다 많이 입력했을 때
-                    else if (problemCtrl.answerDiv.textContent.length > problemCtrl.answerMaxLength) {
-                        //problemCtrl.CheckAnswer()
-                    }
-                }  
-
-                // if (problemCtrl.isUseAnswer) {
-                      
-                // }else{
-                //     //키보드 타입이 숫자일때
-                //     if (problemCtrl.keyBoardType == "number") {
-                //         if (problemCtrl.answerDiv.textContent.length == problemCtrl.answerMaxLength) {
-                //             //problemCtrl.answerDiv.textContent = "";
-                //         }
-                            
-                //     }
-                // }
-
-                //problemCtrl.InputEvent(problemCtrl);
-                
-
+                this.BtnActive(problemCtrl);
             });
+            
+
+            
+
         })   
     }
 
@@ -470,6 +330,126 @@ export default class Chapter_1_1 {
         
         // chapter1View02에 'on' 클래스 추가
         document.getElementById(id).classList.add('on');
+    }
+
+    BtnActive(problemCtrl) {
+        if (problemCtrl.answerDiv.textContent.length >= problemCtrl.answerMaxLength) {
+            const selection = window.getSelection();
+            const range = document.createRange();
+
+            problemCtrl.answerDiv.textContent = problemCtrl.answerDiv.textContent.substring(0, problemCtrl.answerMaxLength);
+
+            range.selectNodeContents(problemCtrl.answerDiv);
+            range.collapse(false);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+
+        // const currentValue = problemCtrl.answerDiv.textContent;
+        // //problemCtrl.imgDiv.style.opacity = 0
+
+        // let filteredValue;
+        // if (problemCtrl.keyBoardType == "number") {
+        //     filteredValue = currentValue.replace(/[^0-9.]/g, '');
+        // } else if (problemCtrl.keyBoardType == "korean") {
+        //     filteredValue = currentValue.replace(/[^\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF\s]/g, '')
+        // }
+
+        // problemCtrl.answerDiv.textContent = filteredValue;
+
+        if (problemCtrl.answerDiv.textContent.length == "") {
+            problemCtrl.answerDiv.style.lineHeight = problemCtrl.answerDivHeight + "px"
+        } else {
+            problemCtrl.answerDiv.style.lineHeight = problemCtrl.answerDivLineHeight + "px"
+        }
+
+        if(problemCtrl.answerDiv.textContent === problemCtrl.answer){
+            //problemCtrl.isUseAnswer = true;
+        }
+    
+        //키보드 타입이 숫자일때
+        if (problemCtrl.keyBoardType == "number") {
+            console.log(problemCtrl.answerDiv.textContent.length, problemCtrl.answerMaxLength);
+            if (problemCtrl.answerDiv.textContent.length == problemCtrl.answerMaxLength) {
+                //problemCtrl.CheckAnswer()
+                
+                // 확인 버튼 활성화
+                //this.chapter1Array
+                let init = new Date().getTime(); 
+                const randomNumbers = Math.floor(Math.random()) + init;
+                if(problemCtrl.element.classList[1] === "c1_2" && problemCtrl.answerDiv.textContent.trim() !== ""){
+                    // 현재 입력박스의 인덱스 찾기
+                    const currentIndex = this.ProblemList2.indexOf(problemCtrl);
+                    
+                    // 이미 해당 인덱스의 값이 배열에 있다면 해당 인덱스의 값을 교체
+                    const existingIndex = MainEvent.chapter1Array.findIndex((_, idx) => 
+                        idx === currentIndex
+                    );
+                    
+                    if (existingIndex !== -1) {
+                        MainEvent.chapter1Array[existingIndex] = randomNumbers;
+                    } else {
+                        MainEvent.chapter1Array.push(randomNumbers);
+                    }
+                    console.log(randomNumbers);
+                }
+                if(MainEvent.chapter1Array.length === 5){
+                    const chapter1_confirm1 = document.querySelector("#chapter1_confirm1");
+                    chapter1_confirm1.disabled = false;
+                }
+
+
+            }
+                
+        }
+        //키보드 타입이 한글일때
+        else if (problemCtrl.keyBoardType == "korean") {
+            if (problemCtrl.answerDiv.textContent.length > problemCtrl.answerMaxLength) {
+                return
+            }
+            if (problemCtrl.answerDiv.textContent.length === problemCtrl.answerMaxLength) {
+                problemCtrl.inputHangulCnt++
+                
+
+                // 확인 버튼 활성화
+                let init = new Date().getTime(); 
+                const randomNumbers = Math.floor(Math.random()) + init;
+                
+                if(problemCtrl.element.classList[1] === "c1_2" && problemCtrl.answerDiv.textContent.trim() !== ""){
+                    // 현재 입력박스의 인덱스 찾기
+                    const currentIndex = this.ProblemList2.indexOf(problemCtrl);
+                    
+                    // 해당 인덱스의 값이 있다면 삭제
+                    if (MainEvent.chapter1HanglArray[currentIndex] !== undefined) {
+                        delete MainEvent.chapter1HanglArray[currentIndex];
+                    }
+                    
+                    // 새로운 값 추가
+                    MainEvent.chapter1HanglArray[currentIndex] = randomNumbers;
+                    
+                    // undefined를 제거하고 실제 값만 계산하기 위해 필터링
+                    const validEntriesCount = Object.values(MainEvent.chapter1HanglArray).filter(x => x !== undefined).length;
+                    
+                    if(validEntriesCount === 5){
+                        const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
+                        chapter1_confirm2.disabled = false;
+                    } else {
+                        const chapter1_confirm2 = document.querySelector("#chapter1_confirm2");
+                        chapter1_confirm2.disabled = true;
+                    }
+                } else if(problemCtrl.element.classList[1] === "c1_2") {
+                    // 입력값이 비어있을 경우 해당 인덱스의 값 삭제
+                    const currentIndex = this.ProblemList2.indexOf(problemCtrl);
+                    if (MainEvent.chapter1HanglArray[currentIndex] !== undefined) {
+                        delete MainEvent.chapter1HanglArray[currentIndex];
+                    }
+                }
+                
+                console.log(MainEvent.chapter1HanglArray);
+                 
+                
+            } 
+        }  
     }
 
 

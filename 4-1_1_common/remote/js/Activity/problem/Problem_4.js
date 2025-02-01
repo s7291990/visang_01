@@ -109,8 +109,7 @@ export default class Problem_4 {
                             switch(index) {
                                 case 0:
                                     problem.keyBoardType = "korean"
-                                    problem.answerDiv.style.fontFamily = "Malgun"
-                                    problem.answerDiv.style.fontWeight = "bold"
+                                    problem.answerDiv.style.fontFamily = "Malgunbd"
                                     problem.SetAnswerText(rightNumber)
                                     // kkm_추가_처음일때만 Active
                                     if(!problem.isActive) problem.Activate()

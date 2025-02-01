@@ -377,10 +377,10 @@ button {
     background-color: rgba(0,0,0,.6);
     z-index: 100;
 }
-#chapter1-confirm01.confirm-popup{background:url(../img/common/bg-dim-chapter01.png) no-repeat center top;background-size:2130px 1060px;}
-#chapter1-confirm02.confirm-popup{background:url(../img/common/bg-dim-chapter02.png) no-repeat center top;background-size:2130px 1060px;}
-#chapter2-confirm01.confirm-popup{background:url(../img/common/bg-dim-chapter03.png) no-repeat center top;background-size:2130px 1060px;}
-#chapter2-confirm02.confirm-popup{background:url(../img/common/bg-dim-chapter04.png) no-repeat center top;background-size:2130px 1060px;}
+#chapter1-confirm01.confirm-popup{background:url(../img/common/bg-dim-chapter01.png) no-repeat center top;background-size:cover;}
+#chapter1-confirm02.confirm-popup{background:url(../img/common/bg-dim-chapter02.png) no-repeat center top;background-size:cover;}
+#chapter2-confirm01.confirm-popup{background:url(../img/common/bg-dim-chapter03.png) no-repeat center top;background-size:cover;}
+#chapter2-confirm02.confirm-popup{background:url(../img/common/bg-dim-chapter04.png) no-repeat center top;background-size:cover;}
 .confirm-popup.on{display:flex;}
 .chapter-mask01{padding:10px;position:absolute;left:706px;top:356px;border-radius:20px;background:#fff;width:340px;height:auto;overflow:Hidden;}
 .chapter-mask01 img{width:100%;}
@@ -467,4 +467,8 @@ button {
 }
 .c1_2 .write-answer-div{
     color: #000 !important
+}
+
+#chapter3 *{
+    font-family: 'Malgunbd';
 }
